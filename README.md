@@ -4,7 +4,7 @@
 Hey there, I'm kevlu8, and I like coding! This is my first C++ program, and I'm still learning as I'm typing this! 0
 I went from knowing nothing about C++ to being able to do decent stuff in it in just about a month.
 I apologize for the crappy payloads of this trojan: after all, I'm still trying to learn.
-Credit goes to https://www.discord.gg/zw for helping me out on a lot of this!
+Credit goes to [this Discord server](https://www.discord.gg/zw) for helping me out on a lot of this!
 
 ## **⚠️⚠️ DISCLAIMER ⚠️⚠️**
 
