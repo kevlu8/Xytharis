@@ -23,7 +23,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-    if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable and corrupt your data should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE GIANT FUCKERY", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
+    if (MessageBoxW(NULL, L"This program is a joke program that will not harm your computer, however it does contain flashing lights and will crash your system. Understanding this, have you saved all your files and are not sensitive to flashing lights?", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
     {
         ExitProcess(0);
     }
