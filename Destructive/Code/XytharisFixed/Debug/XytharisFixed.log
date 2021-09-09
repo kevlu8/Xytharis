@@ -1,4 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (XytharisFixed.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   Xytharis.cpp
   XytharisFixed.vcxproj -> C:\Users\kevin\Desktop\See Plus Plus\XytharisFixed\Debug\Xytharis.exe
