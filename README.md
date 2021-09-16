@@ -1,9 +1,5 @@
 # Xytharis
 
-## Temporarily not being updated
-
-Hey guys, I'm not gonna be committing any more changes until I actually finish the program due to it being a huge hassle
-
 ### The GDI Trojan
 
 Hey there, I'm kevlu8, and I like coding! This is my first C++ program, and I'm still learning as I'm typing this!
