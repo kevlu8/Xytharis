@@ -42,4 +42,6 @@ bool p1() { //memz final payload effect but random
         Beep(rand() % 30000, rand() % 1000);
 
     }
+
+    return 0;
 }

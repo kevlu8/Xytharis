@@ -244,7 +244,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
     for (int i = 1; i < 50; i++) {
-        BitBlt(desk, sin(i), cos(i), sw1, h, hdc, rand() % i * 50, y, PATINVERT);
+        BitBlt(desk, sin(i), cos(i), sw1, h, hdc, rand() % i * 50, rand() % i * 50, PATINVERT);
     }
 
 
