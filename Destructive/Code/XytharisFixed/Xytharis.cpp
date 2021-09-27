@@ -96,7 +96,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     void audio() {
         while (true) {
-            Sleep(rand() % 100);
+            Sleep(rand() % 10000);
             Beep(rand() % 2000, rand() % 5000);
         }
     }
