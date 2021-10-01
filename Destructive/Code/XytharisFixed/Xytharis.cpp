@@ -156,7 +156,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, 0x9273ecef);
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, PATINVERT);
     }
-
+    
+    // SetPixel is slow
     //random pixels all over the place
     for (INT i = 1; i < 100; i++) {
         CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255));
