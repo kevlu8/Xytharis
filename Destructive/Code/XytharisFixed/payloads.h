@@ -1,17 +1,7 @@
-//This is actually C++!!
-#include <windows.h>
-#include <WinUser.h>
-#include <iostream>
-#include <wingdi.h>
-#include <math.h>
-#include <stdlib.h>
-#include <thread>
-#include <processthreadsapi.h>
-#include <tlhelp32.h>
-#include <utilapiset.h>
-
-bool p1() { //memz final payload effect but random
+#pragma once
+int p1() { //memz final payload but random
     for (int i = 1; i < 50; i++) {
+
         //msgbox spam
         DWORD dwID = 0;
         MSGBOXPARAMS msg = { 0 };
@@ -42,6 +32,5 @@ bool p1() { //memz final payload effect but random
         Beep(rand() % 30000, rand() % 1000);
 
     }
-
     return 0;
 }
