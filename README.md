@@ -1,5 +1,18 @@
 # Xytharis
 
+![code grade](https://img.shields.io/codefactor/grade/github/kevlu8/Xytharis/main)
+![language](https://img.shields.io/github/languages/top/kevlu8/Xytharis)
+![code size](https://img.shields.io/github/languages/code-size/kevlu8/Xytharis)
+![full size](https://img.shields.io/github/repo-size/kevlu8/Xytharis)
+![Downloads](https://img.shields.io/github/downloads/kevlu8/Xytharis/total)
+![issues](https://img.shields.io/github/issues/kevlu8/Xytharis)
+![pull req](https://img.shields.io/github/issues-pr/kevlu8/Xytharis)
+![copyright](https://img.shields.io/github/license/kevlu8/Xytharis)
+![stars](https://img.shields.io/github/stars/kevlu8/Xytharis?style=social)
+![sub2kevlu8](https://img.shields.io/youtube/channel/subscribers/UCFlq5_Vc25IBwus8euGTVNA?style=social)
+![keybase](https://img.shields.io/keybase/pgp/kevlu8)
+![commits](https://img.shields.io/github/commit-activity/m/kevlu8/Xytharis)
+
 ### The GDI Trojan
 
 Hey there, I'm kevlu8, and I like coding! This is my first C++ program, and I'm still learning as I'm typing this!
