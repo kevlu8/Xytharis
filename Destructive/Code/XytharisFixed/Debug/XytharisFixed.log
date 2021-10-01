@@ -1,6 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
 C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (XytharisFixed.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Xytharis.cpp
-C:\Users\kevin\Desktop\Github\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(259,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\kevin\Desktop\Github\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(259,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\kevin\Desktop\Github\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(257,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\kevin\Desktop\Github\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(257,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   XytharisFixed.vcxproj -> C:\Users\kevin\Desktop\Github\Xytharis\Destructive\Xytharis.exe
