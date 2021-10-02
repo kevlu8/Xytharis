@@ -178,6 +178,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     for (INT i = 1; i < 1000; i += 5) {
         BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, SRCCOPY);
     } 
+
     ReleaseDC(NULL, desk);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
@@ -195,3 +196,4 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     FreeLibrary(ntdll);
     return 0;
 }
+
