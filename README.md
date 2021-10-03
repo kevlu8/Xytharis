@@ -25,7 +25,7 @@ fun fact: this is also a school project lmao
 ## Contributing
 If your eyes are burned out by my code, feel free to create a pull request or dm me (kevlu8#5240) on Discord asking to be added as a contributer.
 
-Special thanks to ericjin01 and IOCTL32 for helping me out on this
+Special thanks to ericjin01 and Luid32 for helping me out on this
 
 ## **⚠️⚠️ DISCLAIMER ⚠️⚠️**
 
