@@ -13,6 +13,9 @@
 ![keybase](https://img.shields.io/keybase/pgp/kevlu8)
 ![commits](https://img.shields.io/github/commit-activity/m/kevlu8/Xytharis)
 
+### Unfinished
+This is not finished!!
+
 ### The GDI Trojan
 
 Hey there, I'm kevlu8, and I like coding! This is my first C++ program, and I'm still learning as I'm typing this!
