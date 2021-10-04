@@ -1,4 +1,5 @@
 #pragma once
+//#define fori(x) for (INT )
 
 int p1() { //msgbox
     MSGBOXPARAMS msg2 = { 0 };
@@ -23,7 +24,7 @@ int p1() { //msgbox
 }
 
 int p2() { //memz final payload but random
-    for (int i = 1; i < 50; i++) {
+    fori(50) {
 
         //msgbox spam
         DWORD dwID = 0;
