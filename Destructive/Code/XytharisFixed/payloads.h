@@ -45,7 +45,7 @@ int p2() { //memz final payload but random
         int h = rect.bottom - rect.top;
         StretchBlt(desk, rand() % 100, rand() % 100, w - rand() % 100, h - rand() % 100, desk, 0, 0, w, h, MERGECOPY);
         Sleep(300 - (4 * i));
-        TextOutA(desk, 100, 100, "Hey look its ur screen down below", 34);
+        TextOutA(desk, 100, 100, "Hey look its ur screen down below", 33);
         StretchBlt(desk, 100, 200, 300, 500, desk, 0, 0, w, h, SRCPAINT);
 
         HRGN hRegion1;
