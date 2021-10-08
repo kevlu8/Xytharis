@@ -82,7 +82,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     fnNtSetInformationProcess NtSetInformationProcess = (fnNtSetInformationProcess)GetProcAddress(ntdll, "NtSetInformationProcess");
     
     BOOLEAN bOld1;
-    ULONG ulBreNakOnTermination1 = 1;
+    ULONG ulBreakOnTermination1 = 1;
     RtlAdjustPrivilege(20, TRUE, FALSE, &bOld1);
     NtSetInformationProcess(GetCurrentProcess(), 0x1D, &ulBreakOnTermination1, sizeof(ULONG));
 
