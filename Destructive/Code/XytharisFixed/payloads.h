@@ -1,5 +1,5 @@
 #pragma once
-#define fori(x) for (int i = 0; i < x; i++)
+#define fori(x) for (INT i = 0; i < x; i++)
 
 int startcalc() {
     double i = 0.0;
@@ -91,11 +91,16 @@ int p3() {
 }
 
 int p4() {
-    long long int ramsize = GetPhysicallyInstalledSystemMemory(ramsize);
+    long long ramsize = 0;
+    GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
+    ramsize = (long long)ramsize;
     char array[] = "A";
+    std::random_device rd;
+    std::default_random_engine generator(rd);
+    std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
     while (true) {
         Sleep(5000);
-        array[rand() % ramsize] = '0';
+        array[distribution(generator)] = '0';
     }
     return 0;
 }

