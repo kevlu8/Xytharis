@@ -92,15 +92,18 @@ int p3() {
 
 int p4() {
     long long ramsize = 0;
+    char* array[] = { "A" }
     GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
-    ramsize = (long long)ramsize;
-    char array[] = "A";
+    //ramsize = (long long)ramsize;
     std::random_device rd;
     std::default_random_engine generator(rd);
     std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
+
+    char* array[] = {"A"};
+
     while (true) {
-        Sleep(5000);
-        array[distribution(generator)] = '0';
+        Sleep(rand() % 5000);
+        ZeroMemory(&array[distribution(generator)], 1)
     }
     return 0;
 }
