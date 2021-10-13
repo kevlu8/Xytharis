@@ -1,15 +1,6 @@
 #pragma once
 #define fori(x) for (INT i = 0; i < x; i++)
 
-int startcalc() {
-    double i = 0.0;
-    while (i < 10) {
-        std::cout << i;
-        i += 0.0000000000001;
-        std::cout << sqrt(sin(i) * cos(i)) * tan(i) + cbrt(i) / cos(i) * tan(i)/sin(i);
-    }
-}
-
 int p1() { //msgbox
     MSGBOXPARAMS msg2 = { 0 };
     msg2.cbSize = sizeof(MSGBOXPARAMS);
@@ -90,7 +81,7 @@ int p3() {
 
 }
 
-int p4() {
+int leakram() {
     long long ramsize = 0;
     char* array[] = { "A" }
     GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
