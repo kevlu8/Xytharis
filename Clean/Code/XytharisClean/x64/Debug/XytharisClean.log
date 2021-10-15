@@ -1,5 +1,0 @@
-﻿  XytharisClean.cpp
-C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\XytharisClean\XytharisClean.cpp(165,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\XytharisClean\XytharisClean.cpp(165,29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\x64\Debug\XytharisClean.exe : fatal error LNK1120: 1 unresolved externals
