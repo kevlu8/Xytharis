@@ -80,21 +80,3 @@ int p3() {
     return 0;
 
 }
-
-int leakram() {
-    long long ramsize = 0;
-    char* array[] = { "A" }
-    GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
-    //ramsize = (long long)ramsize;
-    std::random_device rd;
-    std::default_random_engine generator(rd);
-    std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
-
-    char* array[] = {"A"};
-
-    while (true) {
-        Sleep(rand() % 5000);
-        ZeroMemory(&array[distribution(generator)], 1)
-    }
-    return 0;
-}

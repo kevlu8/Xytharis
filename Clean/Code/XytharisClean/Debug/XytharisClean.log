@@ -1,1 +1,4 @@
-﻿  XytharisClean.vcxproj -> C:\Users\kevin\Desktop\See Plus Plus\XytharisClean\XytharisClean\Debug\XytharisClean.exe
+﻿  XytharisClean.cpp
+C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\XytharisClean\XytharisClean.cpp(169,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\XytharisClean\XytharisClean.cpp(169,29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  XytharisClean.vcxproj -> C:\Users\kevin\Desktop\Github\Xytharis\Clean\Code\Debug\XytharisClean.exe
