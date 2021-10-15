@@ -109,7 +109,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     //ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
 
     if (playmusic) {
-        HANDLE music = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Music, NULL, 0, NULL))
+        HANDLE music = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Music, NULL, 0, NULL);
     } //add music soon, get better method
 
     HANDLE hAudio = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)audio, NULL, 0, NULL);
