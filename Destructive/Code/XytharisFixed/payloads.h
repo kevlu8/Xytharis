@@ -86,13 +86,24 @@ int leakram() {
     const char* array[] = { "AB" };
     GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
     //ramsize = (long long)ramsize;
+    /*
     std::random_device rd;
     std::default_random_engine generator(rd);
     std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
-
-    while (true) {
-        Sleep(rand() % 5000);
-        ZeroMemory(&array[distribution(generator)], 1);
+    */
+    
+    for (PULONGLONG i = 0; i < ramsize; i++) {
+        if (!(i % 100)) {
+            ZeroMemory(&array[distribution(generator)], 1);
+            Sleep(rand() % 5000)
+        }
     }
+    return 0;
+}
+
+int cleanup() {
+    CloseHandle(hmsg2);
+    CloseHandle(hmsg3);
+    ReleaseDC(NULL, desk);
     return 0;
 }
