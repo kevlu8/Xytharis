@@ -107,7 +107,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     HANDLE hmsg1 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msglol, NULL, NULL);
 
     //rick roll
-    //ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
+    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
 
     if (playmusic) {
         HANDLE music = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Music, NULL, 0, NULL);
@@ -194,8 +194,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         INT y = rand() % sh, h = sh - rand() % sh - (sh / 1 - 8);
         HBRUSH brush = CreateSolidBrush(RGB(rand() % 75, rand() % 75, rand() % 75));
         SelectObject(desk, brush);
-        BitBlt(desk, 0, y, 100, h, desk, rand() % 96 - 56, y, SRCCOPY);
-        PatBlt(desk, -1, y, 100, h, PATINVERT);
+        BitBlt(desk, 0, y, float(w / 2) + i, h, desk, rand() % 96 - 56, y, SRCCOPY);
+        PatBlt(desk, -1, y, float(w/2) + i, h, PATINVERT);
         Sleep(rand() % 1234);
     }
 
