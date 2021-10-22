@@ -23,7 +23,7 @@ jobs:
 
     - name: Restore NuGet packages
       # working-directory: ${{env.GITHUB_WORKSPACE\Destructive\Code}}
-      working-directory: ${{D:\\a\\Xytharis\\Xytharis\\Destructive\\Code}}
+      working-directory: ${{D:\a\Xytharis\Xytharis\Destructive\Code}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
       
     - name: nuget for clean
