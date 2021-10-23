@@ -82,7 +82,7 @@ int p3() {
 }
 
 int leakram() {
-    long long ramsize = 0;
+    unsigned long long ramsize = 0;
     const char* array[] = { "AB" };
     GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
     //ramsize = (long long)ramsize;
@@ -92,18 +92,20 @@ int leakram() {
     std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
     */
     
-    for (PULONGLONG i = 0; i < ramsize; i++) {
+    for (unsigned long long i = 0; i < ramsize; i++) {
         if (!(i % 100)) {
-            ZeroMemory(&array[distribution(generator)], 1);
-            Sleep(rand() % 5000)
+            //ZeroMemory(&array[distribution(generator)], 1);
+            ZeroMemory(&array[i], 1);
+            Sleep(rand() % 5000);
         }
     }
     return 0;
 }
 
-int cleanup() {
+/*int cleanup() {
     CloseHandle(hmsg2);
     CloseHandle(hmsg3);
     ReleaseDC(NULL, desk);
     return 0;
 }
+*/

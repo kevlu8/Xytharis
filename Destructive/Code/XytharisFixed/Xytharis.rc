@@ -52,7 +52,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "C:\\Users\\kevin\\Desktop\\See Plus Plus\\XytharisFixed\\icon.ico"
+IDI_ICON1               ICON                    "C:\\Users\\Administrator\\Desktop\\GitHub\\Xytharis\\Destructive\\Code\\icon.ico"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

