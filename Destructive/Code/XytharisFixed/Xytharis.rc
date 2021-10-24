@@ -52,9 +52,8 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1		ICON			"D:\\a\\Xytharis\\Xytharis\\Destructive\\Code\\icon.ico"
-IDI_ICON2               ICON                    "C:\\Users\\Administrator\\Desktop\\GitHub\\Xytharis\\Destructive\\Code\\icon.ico"
-IDI_ICON3		ICON			"..\\icon.ico"
+//IDI_ICON1               ICON                    "C:\\Users\\Administrator\\Desktop\\GitHub\\Xytharis\\Destructive\\Code\\icon.ico"
+IDI_ICON1               ICON                    "..\\icon.ico"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
