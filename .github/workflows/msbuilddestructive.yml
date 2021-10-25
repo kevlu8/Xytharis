@@ -1,4 +1,4 @@
-name: MSBuild
+name: Xytharis Destructive
 
 on: [push, pull_request]
 
