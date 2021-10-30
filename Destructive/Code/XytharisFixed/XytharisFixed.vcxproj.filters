@@ -26,6 +26,12 @@
     <ClInclude Include="payloads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="otherpayloads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Xytharis.rc">

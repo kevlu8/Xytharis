@@ -1,4 +1,5 @@
 #pragma once
+#include "include.h"
 #define fori(x) for (INT i = 0; i < x; i++)
 
 int p1() { //msgbox
