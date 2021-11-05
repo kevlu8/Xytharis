@@ -1,3 +1,5 @@
+/*
+
 #include "include.h"
 
 BOOL CALLBACK refresh(HWND hwnd, [[maybe_unused]] LPARAM lparam) {
@@ -39,4 +41,4 @@ VOID WINAPI corrupt(HWND hMsg) {
 		Sleep(10);
 	}
 
-}
+}*/

