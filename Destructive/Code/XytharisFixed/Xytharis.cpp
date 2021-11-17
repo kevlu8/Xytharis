@@ -1,5 +1,7 @@
 #pragma comment(lib, "Winmm.lib")
 
+#define WIN32_LEAN_AND_MEAN
+
 #ifdef UNICODE
 #undef UNICODE
 #define MULTIBYTE
@@ -210,7 +212,17 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
 
+    HANDLE hHDC = CreateCompatibleDC(desk);
+
+    fori(360) {
+        HBRUSH bruh = CreateSolidBrush(rgb(69, 72, 96));
+        BitBlt(desk, 0, sin(i), sw, h, hHDC, 0, 0, SRCCOPY);
+        PatBlt(desk, 0, 0, sw, h, desk, PATINVERT);
+        Sleep(50);
+    }
+
     ReleaseDC(NULL, desk);
+    ReleaseDC(NULL, hHDC);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
     CloseHandle(hmsg3);
