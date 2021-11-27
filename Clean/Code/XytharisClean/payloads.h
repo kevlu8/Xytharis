@@ -1,5 +1,12 @@
 #pragma once
 #define fori(x) for (INT i = 0; i < x; i++)
+#define whiletrue while (true)
+
+int rickroll() {
+    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, 0, SW_HIDE);
+
+    return 0;
+}
 
 int p1()
 { //msgbox
