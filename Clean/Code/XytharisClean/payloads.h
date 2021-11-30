@@ -1,4 +1,5 @@
 #pragma once
+#include <mmeapi.h>
 #define fori(x) for (INT i = 0; i < x; i++)
 #define whiletrue while (true)
 
@@ -114,10 +115,11 @@ int p4()
             "https://www.twitter.com/dreamwastaken",
             "https://www.youtube.com/channel/UCsiysQAqUGTLsk04k_BVowQ",
             "https://www.youtube.com/watch?v=47ibFGy-w18"
-        }
+        };
         Sleep(rand() % 10000);
         ShellExecuteA(NULL, "open", urls[rand() % 14], NULL, NULL, SW_HIDE);
     }
+    return 0;
 }
 
 // Put "Your Mom" on the screen as text
@@ -147,6 +149,7 @@ int p5()
         }
         ReleaseDC(NULL, hdc);
     }
+    return 0;
 }
 
 // Put a random image on the screen
@@ -170,6 +173,7 @@ int p6()
         DeleteObject(hBitmap);
         ReleaseDC(NULL, hdc);
     }
+    return 0;
 }
 
 
@@ -184,6 +188,7 @@ int p7()  //MUST DO IN THREAD
         dwVolume = (rand() % 0xFFFF) | (dwVolume & 0xFFFF0000);
         waveOutSetVolume(NULL, dwVolume);
     }
+    return 0;
 }
 
 // Color shift the screen using BitBlt
@@ -210,6 +215,7 @@ int p8()
         DeleteObject(hBitmap);
         ReleaseDC(NULL, hdc);
     }
+    return 0;
 }
 
 // Connect a virtual USB device
@@ -219,7 +225,8 @@ int p9()
     HANDLE hDevice = CreateFileA("\\\\.\\RandomUSBFile", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
     if (hDevice == INVALID_HANDLE_VALUE)
     {
-        break;
+        return -1;
     }
     CloseHandle(hDevice);
+    return 0;
 }

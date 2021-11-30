@@ -21,8 +21,7 @@ DWORD WINAPI audio(LPVOID lpParam) {
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, INT nCmdShow) {
-    if (MessageBoxW(NULL, "This program contains rapid flashing lights and audio.\n\n"
-                          "Do you wish to continue?",
+    if (MessageBoxW(NULL, L"This program contains rapid flashing lights and audio.\n\nDo you wish to continue?",
                     L"Warning", MB_YESNO | MB_ICONWARNING) == IDNO) {
         ExitProcess(0);
     }
@@ -39,6 +38,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p8,
         p9
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
+
+    DWORD zero = 0;
 
     MSGBOXPARAMS msglol = { 0 };
     msglol.cbSize = sizeof(MSGBOXPARAMS);
@@ -166,9 +167,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     HANDLE hHDC = CreateCompatibleDC(desk);
 
     fori(360) {
-        HBRUSH bruh = CreateSolidBrush(rgb(69, 72, 96));
-        BitBlt(desk, 0, sin(i), sw, h, hHDC, 0, 0, SRCCOPY);
-        PatBlt(desk, 0, 0, sw, h, desk, PATINVERT);
+        HBRUSH bruh = CreateSolidBrush(RGB(69, 72, 96));
+        BitBlt(desk, 0, sin(i), sw, h, desk, 0, 0, SRCCOPY);
+        PatBlt(desk, 0, 0, sw, h, PATINVERT);
         Sleep(50);
     }
 
@@ -188,7 +189,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     
 
     ReleaseDC(NULL, desk);
-    ReleaseDC(NULL, hHDC);
+    CloseHandle(hHDC);
     CloseHandle(hmsg1);
     CloseHandle(hmsg2);
     CloseHandle(hmsg3);
