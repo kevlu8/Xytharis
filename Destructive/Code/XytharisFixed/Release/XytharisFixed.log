@@ -1,5 +1,19 @@
-﻿  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 8 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  XytharisFixed.vcxproj -> C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\Release\Xytharis.exe
+﻿  Xytharis.cpp
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\payloads.h(139,3): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\payloads.h(208,3): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\payloads.h(311,3): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\payloads.h(362,3): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(48,19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(48,19): error C2059: syntax error: '__stdcall'
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(86,5): error C2065: 'fnRtlAdjustPrivilege': undeclared identifier
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(86,26): error C2146: syntax error: missing ';' before identifier 'RtlAdjustPrivilege'
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(86,26): error C2065: 'RtlAdjustPrivilege': undeclared identifier
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(86,48): error C2065: 'fnRtlAdjustPrivilege': undeclared identifier
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(86,69): error C2146: syntax error: missing ';' before identifier 'GetProcAddress'
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(92,5): error C3861: 'RtlAdjustPrivilege': identifier not found
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(191,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(192,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(209,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(209,29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(227,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\GitHub\Xytharis\Destructive\Code\XytharisFixed\Xytharis.cpp(254,5): error C3861: 'RtlAdjustPrivilege': identifier not found

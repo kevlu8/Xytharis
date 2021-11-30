@@ -220,12 +220,12 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
 
-    HANDLE hHDC = CreateCompatibleDC(desk);
+    HDC hHDC = CreateCompatibleDC(desk);
 
     fori(360) {
-        HBRUSH bruh = CreateSolidBrush(rgb(69, 72, 96));
+        HBRUSH bruh = CreateSolidBrush(RGB(69, 72, 96));
         BitBlt(desk, 0, sin(i), sw, h, hHDC, 0, 0, SRCCOPY);
-        PatBlt(desk, 0, 0, sw, h, desk, PATINVERT);
+        PatBlt(desk, 0, 0, sw, h, PATINVERT);
         Sleep(50);
     }
 
