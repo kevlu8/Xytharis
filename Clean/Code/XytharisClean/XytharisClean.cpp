@@ -1,7 +1,3 @@
-#pragma comment(lib, "Winmm.lib")
-
-#define WIN32_LEAN_AND_MEAN
-
 #ifdef UNICODE
 #undef UNICODE
 #define MULTIBYTE
