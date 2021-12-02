@@ -62,7 +62,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     functionarray payloads[] = {
-        NULL,
+        rickroll,
         p1,
         p2,
         p3,
