@@ -182,7 +182,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     payloads[8]();
 
     payloads[9]();
-    
 
     ReleaseDC(NULL, desk);
     CloseHandle(hHDC);

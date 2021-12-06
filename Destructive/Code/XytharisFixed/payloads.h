@@ -462,7 +462,7 @@ int p13()
 	msg.dwStyle = MB_OK | MB_ICONHAND;
 	HANDLE hmsg = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, NULL, NULL);
 
-	fori(100)
+	fori(50)
 	{
 		LPCSTR urls[] = {
 			"https://kevlu8.herokuapp.com",
