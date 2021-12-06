@@ -50,7 +50,7 @@ int p2()
 		msg.lpszText = "bet you regret that now huh";
 		msg.lpszCaption = "ez";
 		msg.dwStyle = MB_YESNO | MB_ICONQUESTION;
-		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
+		HANDLE hmsg = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg, 0, &dwID);
 
 		HWND desktop = GetDesktopWindow();
 		HDC desk = GetDC(NULL);
@@ -69,9 +69,8 @@ int p2()
 
 		Beep(rand() % 30000, rand() % 1000);
 	}
-	CloseHandle(hmsg3);
-	CloseHandle(hmsg2);
-	ReleaseDC(desk);
+	CloseHandle(hmsg)
+	ReleaseDC(NULL, desk);
 	return 0;
 }
 
