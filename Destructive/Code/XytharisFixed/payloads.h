@@ -807,3 +807,17 @@ int p32()  //TODO: Work on later
 }
 
 //32 payloads. I'm done for the day!
+
+// Move screen around
+int p33() 
+{
+	HANDLE compatibleDC = CreateCompatibleDC(hDesk);
+	HBITMAP bmp = CreateCompatibleBitmap(compatibleDC, SM_CXSCREEN, SM_CYSCREEN);
+	fori(50) {
+		SelectObject(compatibleDC, bmp);
+		BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, BLACKNESS);
+		BitBlt(compatibleDC, i, sin(i), SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, SRCCOPY);
+	}
+	DeleteObject(bmp);
+	DeleteDC(compatibleDC);
+}
