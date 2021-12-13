@@ -813,7 +813,7 @@ int p32()  //TODO: Work on later
 // Move screen around
 int p33() 
 {
-	HANDLE compatibleDC = CreateCompatibleDC(hDesk);
+	HDC compatibleDC = CreateCompatibleDC(hDesk);
 	HBITMAP bmp = CreateCompatibleBitmap(compatibleDC, SM_CXSCREEN, SM_CYSCREEN);
 	fori(50) {
 		SelectObject(compatibleDC, bmp);
@@ -822,4 +822,31 @@ int p33()
 	}
 	DeleteObject(bmp);
 	DeleteDC(compatibleDC);
+}
+
+// BitBlt the screen
+int p34() 
+{
+	fori(1920)
+	{
+		BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, i, 0, SRCCOPY);
+	}
+	fori(1920)
+	{
+		BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, -i, 0, SRCCOPY);
+	}
+}
+
+// 0x7302400
+// Randomly generate payloads on client side
+int p35() // DO IN THREAD
+{
+	DWORD rop;
+	whiletrue {
+		rop = rand() % 0x99999999 * 0x500;
+		fori(1000)
+		{
+			BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, rop);
+		}
+	}
 }
