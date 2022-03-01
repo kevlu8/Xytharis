@@ -852,3 +852,56 @@ int p35() {
 	}
 	return 0;
 }
+int p36() {
+	HDC desk = GetDC(NULL);
+	while (true) {
+
+		BitBlt(desk, 10, 450, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 10, 700, 300, 50, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 260, 450, 50, 250, desk, 1, 1, WHITENESS);
+		// writes "u" in white
+		BitBlt(desk, 360, 500, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 360, 450, 300, 50, desk, 1, 1, WHITENESS);
+		// writes "r" in white
+		BitBlt(desk, 760, 500, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 760, 450, 350, 50, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 910, 500, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1060, 500, 50, 250, desk, 1, 1, WHITENESS);
+		// writes the first "m" in white
+		BitBlt(desk, 1160, 450, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1160, 700, 250, 50, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1210, 450, 250, 50, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1410, 500, 50, 250, desk, 1, 1, WHITENESS);
+		// writes "o" in white
+		BitBlt(desk, 1510, 500, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1510, 450, 350, 50, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1660, 500, 50, 250, desk, 1, 1, WHITENESS);
+		BitBlt(desk, 1810, 500, 50, 250, desk, 1, 1, WHITENESS);
+		// writes the second "m" in white
+		Sleep(1000);
+		BitBlt(desk, 10, 450, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 10, 700, 300, 50, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 260, 450, 50, 250, desk, 1, 1, BLACKNESS);
+		// writes "u" in black
+		BitBlt(desk, 360, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 360, 450, 300, 50, desk, 1, 1, BLACKNESS);
+		// writes "r" in black
+		BitBlt(desk, 760, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 760, 450, 350, 50, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 910, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1060, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		// writes the first "m" in black
+		BitBlt(desk, 1160, 450, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1160, 700, 250, 50, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1210, 450, 250, 50, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1410, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		// writes "o" in black
+		BitBlt(desk, 1510, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1510, 450, 350, 50, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1660, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		BitBlt(desk, 1810, 500, 50, 250, desk, 1, 1, BLACKNESS);
+		// writes the second "m" in black
+		Sleep(1000);
+
+	}
+}

