@@ -852,6 +852,7 @@ int p35() {
 	}
 	return 0;
 }
+
 int p36() {
 	HDC desk = GetDC(NULL);
 	while (true) {
@@ -904,6 +905,7 @@ int p36() {
 		Sleep(1000);
 
 	}
+}
 
 int p37() {
 	whiletrue
