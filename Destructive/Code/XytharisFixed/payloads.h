@@ -852,7 +852,6 @@ int p35() {
 	}
 	return 0;
 }
-<<<<<<< Updated upstream
 int p36() {
 	HDC desk = GetDC(NULL);
 	while (true) {
@@ -905,9 +904,8 @@ int p36() {
 		Sleep(1000);
 
 	}
-=======
 
-int p36() {
+int p37() {
 	whiletrue
 	{
 		Sleep(rand() % 10000);
@@ -923,7 +921,7 @@ int p36() {
 	return 0;
 }
 
-int p37() {
+int p38() {
 	whiletrue
 	{
 		// Open a link
@@ -934,7 +932,6 @@ int p37() {
 	}
 }
 
-int p38() {
+int p39() {
 
->>>>>>> Stashed changes
 }
