@@ -855,57 +855,91 @@ int p35() {
 
 int p36() {
 	HDC desk = GetDC(NULL);
+	DWORD randEffect;
 	while (true) {
-
-		BitBlt(desk, 10, 450, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 10, 700, 300, 50, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 260, 450, 50, 250, desk, 1, 1, WHITENESS);
-		// writes "u" in white
-		BitBlt(desk, 360, 500, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 360, 450, 300, 50, desk, 1, 1, WHITENESS);
-		// writes "r" in white
-		BitBlt(desk, 760, 500, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 760, 450, 350, 50, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 910, 500, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1060, 500, 50, 250, desk, 1, 1, WHITENESS);
-		// writes the first "m" in white
-		BitBlt(desk, 1160, 450, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1160, 700, 250, 50, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1210, 450, 250, 50, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1410, 500, 50, 250, desk, 1, 1, WHITENESS);
-		// writes "o" in white
-		BitBlt(desk, 1510, 500, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1510, 450, 350, 50, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1660, 500, 50, 250, desk, 1, 1, WHITENESS);
-		BitBlt(desk, 1810, 500, 50, 250, desk, 1, 1, WHITENESS);
-		// writes the second "m" in white
-		Sleep(1000);
-		BitBlt(desk, 10, 450, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 10, 700, 300, 50, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 260, 450, 50, 250, desk, 1, 1, BLACKNESS);
-		// writes "u" in black
-		BitBlt(desk, 360, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 360, 450, 300, 50, desk, 1, 1, BLACKNESS);
-		// writes "r" in black
-		BitBlt(desk, 760, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 760, 450, 350, 50, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 910, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1060, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		// writes the first "m" in black
-		BitBlt(desk, 1160, 450, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1160, 700, 250, 50, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1210, 450, 250, 50, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1410, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		// writes "o" in black
-		BitBlt(desk, 1510, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1510, 450, 350, 50, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1660, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		BitBlt(desk, 1810, 500, 50, 250, desk, 1, 1, BLACKNESS);
-		// writes the second "m" in black
+		int screenX = GetSystemMetrics(SM_CXSCREEN);
+		int screenY = GetSystemMetrics(SM_CYSCREEN);
+		int y1 = rand() % screenY;
+		int y2 = rand() % screenY;
+		int y3 = rand() % screenY;
+		int y4 = rand() % screenY;
+		int y5 = rand() % screenY;
+		int randEffectNum = rand() % 13;
+		// int randEffectNum = 1;
+		if (randEffectNum == 1) {
+			randEffect = CAPTUREBLT;
+		}
+		else if (randEffectNum == 2) {
+			randEffect = DSTINVERT;
+		}
+		else if (randEffectNum == 3) {
+			randEffect = MERGECOPY;
+		}
+		else if (randEffectNum == 4) {
+			randEffect = MERGEPAINT;
+		}
+		else if (randEffectNum == 5) {
+			randEffect = NOTSRCCOPY;
+		}
+		else if (randEffectNum == 6) {
+			randEffect = MERGECOPY;
+		}
+		else if (randEffectNum == 7) {
+			randEffect = NOTSRCERASE;
+		}
+		else if (randEffectNum == 8) {
+			randEffect = PATCOPY;
+		}
+		else if (randEffectNum == 9) {
+			randEffect = PATINVERT;
+		}
+		else if (randEffectNum == 10) {
+			randEffect = PATPAINT;
+		}
+		else if (randEffectNum == 11) {
+			randEffect = SRCAND;
+		}
+		else if (randEffectNum == 12) {
+			randEffect = SRCERASE;
+		}
+		else if (randEffectNum == 13) {
+			randEffect = SRCINVERT;
+		}
+		else if (randEffectNum == 0) {
+			randEffect = SRCPAINT;
+		}
+		else {
+			//cout << "death";
+		}
+		BitBlt(desk, 10, 450, 50, 250, desk, 10, y1, randEffect);
+		BitBlt(desk, 10, 700, 300, 50, desk, 10, y1, randEffect);
+		BitBlt(desk, 260, 450, 50, 250, desk, 260, y1, randEffect);
+		// writes "u"
+		BitBlt(desk, 360, 500, 50, 250, desk, 360, y2, randEffect);
+		BitBlt(desk, 360, 450, 300, 50, desk, 360, y2, randEffect);
+		// writes "r"
+		BitBlt(desk, 760, 500, 50, 250, desk, 760, y3, randEffect);
+		BitBlt(desk, 760, 450, 350, 50, desk, 760, y3, randEffect);
+		BitBlt(desk, 910, 500, 50, 250, desk, 910, y3, randEffect);
+		BitBlt(desk, 1060, 500, 50, 250, desk, 1060, y3, randEffect);
+		// writes the first "m"
+		BitBlt(desk, 1160, 450, 50, 250, desk, 1160, y4, randEffect);
+		BitBlt(desk, 1160, 700, 250, 50, desk, 1160, y4, randEffect);
+		BitBlt(desk, 1210, 450, 250, 50, desk, 1210, y4, randEffect);
+		BitBlt(desk, 1410, 500, 50, 250, desk, 1410, y4, randEffect);
+		// writes "o"
+		BitBlt(desk, 1510, 500, 50, 250, desk, 1510, y5, randEffect);
+		BitBlt(desk, 1510, 450, 350, 50, desk, 1510, y5, randEffect);
+		BitBlt(desk, 1660, 500, 50, 250, desk, 1660, y5, randEffect);
+		BitBlt(desk, 1810, 500, 50, 250, desk, 1810, y5, randEffect);
+		// writes the second "m"
+		//cout << " randEffectNum = " << randEffectNum << " and randEffect = " << randEffect;
+		//cout << "\ny1 = " << y1 << "and y2 = " << y2 << "and y2 = " << y3 << "and y2 = " << y4 << "and y2 = " << y5;
 		Sleep(1000);
 
 	}
 }
+
 
 int p37() {
 	whiletrue

