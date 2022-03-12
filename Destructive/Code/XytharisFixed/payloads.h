@@ -969,5 +969,10 @@ int p38() {
 }
 
 int p39() {
-
+	whiletrue
+	{ 
+		
+	}
 }
+
+// goal = 64 payloads
